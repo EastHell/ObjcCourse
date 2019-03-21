@@ -110,14 +110,14 @@
             ASAnimal* animalObj1 = (ASAnimal*) obj1;
             ASAnimal* animalObj2 = (ASAnimal*) obj2;
             if (animalObj1.nubersOfLegs > animalObj2.nubersOfLegs) {
-                return (NSComparisonResult)NSOrderedDescending;
+                return NSOrderedDescending;
             }
-            return (NSComparisonResult)NSOrderedSame;
+            return NSOrderedSame;
         }
         if (([obj1 isKindOfClass:[ASAnimal class]]) && ([obj2 isKindOfClass:[ASHuman class]])) {
-            return (NSComparisonResult)NSOrderedDescending;
+            return NSOrderedDescending;
         }
-        return (NSComparisonResult)NSOrderedSame;
+        return NSOrderedSame;
     }];
     
     for (NSObject* obj in sortedArray) {
