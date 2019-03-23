@@ -20,17 +20,20 @@
     
     //Немного усложнил задачку квадрат 3х3 не в центрее поля 10х10, а
     //в случайном месте поля 10х10
-    CGRect field = CGRectMake(arc4random() % 8, arc4random() % 8, 3, 3);
-    NSInteger dotsCount = arc4random() % 101;
+    const NSInteger FIELD_SIDE_LENGTH = 10; //Сторона поля
+    const NSInteger KUBE_SIDE_LENGTH = 3; //Сторона куба
+    const NSInteger MAX_DOTS_COUNT = 100; //Максимальное возможное кол-во точек
+    CGRect kube = CGRectMake(arc4random_uniform(FIELD_SIDE_LENGTH - KUBE_SIDE_LENGTH + 1), arc4random_uniform(FIELD_SIDE_LENGTH - KUBE_SIDE_LENGTH + 1), KUBE_SIDE_LENGTH, KUBE_SIDE_LENGTH);
+    NSInteger dotsCount = arc4random_uniform(MAX_DOTS_COUNT+1);
     NSMutableArray *dotsArray = [NSMutableArray arrayWithCapacity:dotsCount];
     
     //Заполняем массив точками
     for (NSInteger i = 0; i < dotsCount; i++) {
-        CGPoint point = CGPointMake(arc4random() % 10, arc4random() % 10);
+        CGPoint point = CGPointMake(arc4random_uniform(FIELD_SIDE_LENGTH+1), arc4random_uniform(FIELD_SIDE_LENGTH+1));
         if (dotsArray.count == 0) {
             NSValue *element = [NSValue valueWithCGPoint:point];
             [dotsArray addObject:element];
-        } else if ([self dotAlreadyInArray:dotsArray dot:point]){
+        } else if ([self isPoint:point inArray:dotsArray]){
             //Если точка уже существует - генерируем новую
             --i;
         } else {
@@ -40,12 +43,12 @@
     }
     
     NSLog(@"dots count = %lu", dotsArray.count);
-    NSLog(@"field: %@", NSStringFromCGRect(field));
+    NSLog(@"field: %@", NSStringFromCGRect(kube));
     
     //Выводим все точки, если точка попала в поле указываем при выводе
     for (NSValue *element in dotsArray) {
         CGPoint point = [element CGPointValue];
-        if (CGRectContainsPoint(field, point)) {
+        if (CGRectContainsPoint(kube, point)) {
             NSLog(@"point %@ exist in field", NSStringFromCGPoint(point));
         } else {
             NSLog(@"point %@", NSStringFromCGPoint(point));
@@ -56,10 +59,10 @@
 }
 
 //Вспомогательная функция для проверки есть ли уже такая точка в массиве
-- (BOOL) dotAlreadyInArray:(NSMutableArray *)array dot:(CGPoint)dot {
+- (BOOL)isPoint:(CGPoint)point inArray:(NSMutableArray *)array {
     for (NSValue *element in array) {
-        CGPoint point = [element CGPointValue];
-        if (point.x == dot.x && point.y == dot.y) {
+        CGPoint dot = [element CGPointValue];
+        if (dot.x == point.x && dot.y == point.y) {
             return YES;
         }
     }
