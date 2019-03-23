@@ -30,7 +30,7 @@
     NSLog(@"Runner run");
 }
 
-- (NSString *)whatIsYourSpeed{
+- (NSString *)whatIsYourSpeed {
     return [NSString stringWithFormat:@"Runner speed is %ld", self.speed];
 }
 

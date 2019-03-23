@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASHuman : NSObject
 
-@property (strong, nonatomic) NSString* name;
+@property (strong, nonatomic) NSString *name;
 @property (assign, nonatomic) CGFloat height;
 @property (assign, nonatomic) CGFloat weight;
-@property (assign, nonatomic) NSString* sex;
+@property (assign, nonatomic) NSString *sex;
 
 - (void) move;
 

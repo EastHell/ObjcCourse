@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASSuperHuman : ASHuman <ASJumpers>
 
-@property (strong, nonatomic) NSString* pantsColor;
-@property (strong, nonatomic) NSString* superPower;
+@property (strong, nonatomic) NSString *pantsColor;
+@property (strong, nonatomic) NSString *superPower;
 @property (assign, nonatomic) NSInteger jumpHeight;
 
 @end

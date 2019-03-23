@@ -27,12 +27,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    ASBiker* biker = [[ASBiker alloc] init];
-    ASBird* bird = [[ASBird alloc] init];
-    ASDog* dog = [[ASDog alloc] init];
-    ASRunner* runner = [[ASRunner alloc] init];
-    ASSuperHuman* superHuman = [[ASSuperHuman alloc] init];
-    ASSwimmer* swimmer = [[ASSwimmer alloc] init];
+    ASBiker *biker = [[ASBiker alloc] init];
+    ASBird *bird = [[ASBird alloc] init];
+    ASDog *dog = [[ASDog alloc] init];
+    ASRunner *runner = [[ASRunner alloc] init];
+    ASSuperHuman *superHuman = [[ASSuperHuman alloc] init];
+    ASSwimmer *swimmer = [[ASSwimmer alloc] init];
     
     bird.favoriteSwimStyle = @"Brass";
     

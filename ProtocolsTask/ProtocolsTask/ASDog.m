@@ -36,11 +36,11 @@
     NSLog(@"Dog run");
 }
 
-- (void)swim{
+- (void)swim {
     NSLog(@"Dog swim");
 }
 
-- (NSString *)sayFavoriteSwimStyle{
+- (NSString *)sayFavoriteSwimStyle {
     return self.favoriteSwimStyle;
 }
 
