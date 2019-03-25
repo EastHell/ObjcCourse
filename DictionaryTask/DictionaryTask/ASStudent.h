@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *greeting;
 
+- (NSString *)fullName;
+
 @end
 
 NS_ASSUME_NONNULL_END

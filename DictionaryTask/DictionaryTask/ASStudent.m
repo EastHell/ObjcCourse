@@ -10,4 +10,8 @@
 
 @implementation ASStudent
 
+- (NSString *)fullName {
+    return [NSString stringWithFormat:@"%@ %@", self.lastName, self.name];
+}
+
 @end

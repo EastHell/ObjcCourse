@@ -30,28 +30,26 @@
     ASStudent *student9 = [[ASStudent alloc] init];
     ASStudent *student10 = [[ASStudent alloc] init];
     
-    NSArray *studentsArray = [NSArray arrayWithObjects:student1, student2, student3, student4, student5, student6, student7, student8, student9, student10, nil];
+    NSArray *studentsArray = @[student1, student2, student3, student4, student5, student6, student7, student8, student9, student10];
     
-    for (NSInteger i = 0; i < studentsArray.count; i++) {
-        ASStudent *obj = [studentsArray objectAtIndex:i];
-        obj.name = [NSString stringWithFormat:@"student%ld_name", i+1];
-        obj.lastName = [NSString stringWithFormat:@"student%ld_lastName", i+1];
-        obj.greeting = [NSString stringWithFormat:@"student%ld is greeting you!", i+1];
-    }
+    [studentsArray enumerateObjectsUsingBlock:^(ASStudent *obj, NSUInteger idx, BOOL *stop) {
+        obj.name = [NSString stringWithFormat:@"student%ld_name", idx+1];
+        obj.lastName = [NSString stringWithFormat:@"student%ld_lastName", idx+1];
+        obj.greeting = [NSString stringWithFormat:@"student%ld is greeting you!", idx+1];
+    }];
     
-    NSDictionary *classJournal = [NSDictionary
-                                  dictionaryWithObjectsAndKeys:
-                                  student1, [NSString stringWithFormat:@"%@ %@", student1.lastName, student1.name],
-                                  student2, [NSString stringWithFormat:@"%@ %@", student2.lastName, student2.name],
-                                  student3, [NSString stringWithFormat:@"%@ %@", student3.lastName, student3.name],
-                                  student4, [NSString stringWithFormat:@"%@ %@", student4.lastName, student4.name],
-                                  student5, [NSString stringWithFormat:@"%@ %@", student5.lastName, student5.name],
-                                  student6, [NSString stringWithFormat:@"%@ %@", student6.lastName, student6.name],
-                                  student7, [NSString stringWithFormat:@"%@ %@", student7.lastName, student7.name],
-                                  student8, [NSString stringWithFormat:@"%@ %@", student8.lastName, student8.name],
-                                  student9, [NSString stringWithFormat:@"%@ %@", student9.lastName, student9.name],
-                                  student10, [NSString stringWithFormat:@"%@ %@", student10.lastName, student10.name],
-                                  nil];
+    NSDictionary *classJournal = @{
+                                   [student1 fullName] : student1,
+                                   [student2 fullName] : student2,
+               	                    [student3 fullName] : student3,
+                                   [student4 fullName] : student4,
+                                   [student5 fullName] : student5,
+                                   [student6 fullName] : student6,
+                                   [student7 fullName] : student7,
+                                   [student8 fullName] : student8,
+                                   [student9 fullName] : student9,
+                                   [student10 fullName] : student10
+                                   };
     
     NSLog(@"%@", classJournal);
     
