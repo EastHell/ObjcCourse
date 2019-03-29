@@ -10,10 +10,12 @@
 
 @implementation ASPatient
 
-- (instancetype) init:(BOOL (^)(ASPatient *))block {
+- (instancetype)init:(BOOL (^)(ASPatient *))block {
     self = [super init];
     if (self) {
-        [self performSelector:@selector(feelBad:) withObject:block afterDelay:arc4random_uniform(11)+5];
+        [self performSelector:@selector(feelBad:)
+                   withObject:block
+                   afterDelay:arc4random_uniform(11)+5];
     }
     return self;
 }

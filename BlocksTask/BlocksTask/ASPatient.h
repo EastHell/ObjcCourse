@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGFloat temperature;
 @property (assign, nonatomic) BOOL cough;
 
-- (instancetype) init:(BOOL (^)(ASPatient *))block;
+- (instancetype)init:(BOOL (^)(ASPatient *))block;
 - (void)feelBad:(BOOL (^)(ASPatient *))heal;
 
 @end
