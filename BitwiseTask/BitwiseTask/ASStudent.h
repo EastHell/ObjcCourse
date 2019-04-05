@@ -24,14 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) ASStudentSubjectType subjectType;
 
-//@property (assign, nonatomic) BOOL studiesBiology;
-//@property (assign, nonatomic) BOOL studiesMath;
-//@property (assign, nonatomic) BOOL studiesDevelopment;
-//@property (assign, nonatomic) BOOL studiesEngineering;
-//@property (assign, nonatomic) BOOL studiesArt;
-//@property (assign, nonatomic) BOOL studiesPhycology;
-//@property (assign, nonatomic) BOOL studiesAnatomy;
-
 @end
 
 NS_ASSUME_NONNULL_END
