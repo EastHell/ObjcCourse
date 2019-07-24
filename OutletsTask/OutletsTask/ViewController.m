@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "UIColor+Utility.h"
 
 @interface ViewController ()
 
@@ -23,45 +24,45 @@
     self.fieldSize = MIN(self.view.bounds.size.height, self.view.bounds.size.width) / 8.f;
     
     [self.fieldViews enumerateObjectsUsingBlock:^(UIView *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj setFrame:CGRectMake((idx / 4) % 2 * self.fieldSize + (idx % 4) * self.fieldSize * 2, (self.view.bounds.size.height - self.fieldSize * 8) / 2 + (idx / 4) * self.fieldSize, self.fieldSize, self.fieldSize)];
+        [obj setFrame:CGRectMake([self xPositionForIndex:idx],
+                                 [self yPositionForIndex:idx],
+                                 self.fieldSize,
+                                 self.fieldSize)];
     }];
     
     [self.redChessViews enumerateObjectsUsingBlock:^(UIView *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj setFrame:CGRectMake((0.2f * self.fieldSize) + (idx / 4) % 2 * self.fieldSize + (idx % 4) * self.fieldSize * 2, (0.2f * self.fieldSize) + (self.view.bounds.size.height - self.fieldSize * 8) / 2 + (idx / 4) * self.fieldSize, 0.6f * self.fieldSize, 0.6f * self.fieldSize)];
+        [obj setFrame:CGRectMake((0.2f * self.fieldSize) + [self xPositionForIndex:idx],
+                                 (0.2f * self.fieldSize) + [self yPositionForIndex:idx],
+                                 0.6f * self.fieldSize,
+                                 0.6f * self.fieldSize)];
     }];
     
     [self.whiteChessViews enumerateObjectsUsingBlock:^(UIView *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         idx = idx + 20;
-        [obj setFrame:CGRectMake((0.2f * self.fieldSize) + (idx / 4) % 2 * self.fieldSize + (idx % 4) * self.fieldSize * 2, (0.2f * self.fieldSize) + (self.view.bounds.size.height - self.fieldSize * 8) / 2 + (idx / 4) * self.fieldSize, 0.6f * self.fieldSize, 0.6f * self.fieldSize)];
+        [obj setFrame:CGRectMake((0.2f * self.fieldSize) + [self xPositionForIndex:idx],
+                                 (0.2f * self.fieldSize) + [self yPositionForIndex:idx],
+                                 0.6f * self.fieldSize,
+                                 0.6f * self.fieldSize)];
     }];
 }
 
--(CGFloat)randomFromZeroToOne {
-    return (float)(arc4random_uniform(256)) / 255;
+- (CGFloat)xPositionForIndex:(NSUInteger)index {
+    return (index / 4) % 2 * self.fieldSize + (index % 4) * self.fieldSize * 2;
 }
 
--(UIColor *)randomColor {
-    CGFloat r = [self randomFromZeroToOne];
-    CGFloat g = [self randomFromZeroToOne];
-    CGFloat b = [self randomFromZeroToOne];
+- (CGFloat)yPositionForIndex:(NSUInteger)index {
+    const CGFloat ROWS_COUNT = 8;
+    const CGFloat Y_START_POSITION = (self.view.bounds.size.height - self.fieldSize * ROWS_COUNT) / 2;
     
-    return [UIColor colorWithRed:r green:g blue:b alpha:1.f];
+    return Y_START_POSITION + (index / 4) * self.fieldSize;
 }
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:
+(id<UIViewControllerTransitionCoordinator>)coordinator {
+    UIColor *color = [UIColor randomColor];
     
-    UIColor *color = [self randomColor];
     [self.fieldViews enumerateObjectsUsingBlock:^(UIView *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.backgroundColor = color;
-//        CGRect frame = obj.frame;
-//        if (size.height > size.width) {
-//            frame.origin.x = frame.origin.x - (self.view.bounds.size.height - self.fieldSize * 8) / 2;
-//            frame.origin.y = frame.origin.y + (self.view.bounds.size.height - self.fieldSize * 8) / 2;
-//        } else {
-//            frame.origin.x = frame.origin.x + (self.view.bounds.size.width - self.fieldSize * 8) / 2;
-//            frame.origin.y = frame.origin.y - (self.view.bounds.size.width - self.fieldSize * 8) / 2;
-//        }
-//        [obj setFrame:frame];
     }];
 }
 
