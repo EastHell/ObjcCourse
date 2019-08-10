@@ -16,6 +16,7 @@
 		1FEF33BB22E7B228007922C3 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF33B822E7B228007922C3 /* 2.png */; };
 		1FEF33BC22E7B228007922C3 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF33B922E7B228007922C3 /* 3.png */; };
 		1FEF33BD22E7B228007922C3 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF33BA22E7B228007922C3 /* 1.png */; };
+		1FF3259A22FEF58600CAE534 /* UIColor+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3259922FEF58600CAE534 /* UIColor+Utility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		1FEF33B822E7B228007922C3 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		1FEF33B922E7B228007922C3 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		1FEF33BA22E7B228007922C3 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		1FF3259822FEF58600CAE534 /* UIColor+Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utility.h"; sourceTree = "<group>"; };
+		1FF3259922FEF58600CAE534 /* UIColor+Utility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utility.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,8 @@
 				1F613F7122E1CE300004E452 /* LaunchScreen.storyboard */,
 				1F613F7422E1CE300004E452 /* Info.plist */,
 				1F613F7522E1CE300004E452 /* main.m */,
+				1FF3259822FEF58600CAE534 /* UIColor+Utility.h */,
+				1FF3259922FEF58600CAE534 /* UIColor+Utility.m */,
 			);
 			path = AnimationsTask;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF3259A22FEF58600CAE534 /* UIColor+Utility.m in Sources */,
 				1F613F6B22E1CE2F0004E452 /* ViewController.m in Sources */,
 				1F613F7622E1CE300004E452 /* main.m in Sources */,
 				1F613F6822E1CE2F0004E452 /* AppDelegate.m in Sources */,

@@ -7,46 +7,50 @@
 //
 
 #import "ViewController.h"
+#import "UIColor+Utility.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) NSMutableArray<UIView *> *views1;
-@property (strong, nonatomic) NSMutableArray<UIView *> *views2;
+@property (strong, nonatomic) NSMutableArray<UIView *> *fourSquareViews;
 @property (strong, nonatomic) UIImageView *imView;
 
 @end
 
 @implementation ViewController
 
+typedef enum {
+    CornerPositionTopLeft,
+    CornerPositionTopRight,
+    CornerPositionBottomRight,
+    CornerPositionBottomLeft
+} CornerPosition;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
     self.views1 = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < 4; i++) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 40 * i, 40, 40)];
-        view.backgroundColor = [self randomColor];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                (40 * i) + CGRectGetMidY(self.view.bounds),
+                                                                40,
+                                                                40)];
+        view.backgroundColor = [UIColor randomColor];
         [self.view addSubview:view];
         [self.views1 addObject:view];
     }
     
-    self.views2 = [[NSMutableArray alloc] init];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.frame) - 40) * 0, (CGRectGetHeight(self.view.frame) - 40) * 0, 40, 40)];
-    view.backgroundColor = [self randomColor];
-    [self.view addSubview:view];
-    [self.views2 addObject:view];
-    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.frame) - 40) * 0, (CGRectGetHeight(self.view.frame) - 40) * 1, 40, 40)];
-    view1.backgroundColor = [self randomColor];
-    [self.view addSubview:view1];
-    [self.views2 addObject:view1];
-    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.frame) - 40) * 1, (CGRectGetHeight(self.view.frame) - 40) * 1, 40, 40)];
-    view2.backgroundColor = [self randomColor];
-    [self.view addSubview:view2];
-    [self.views2 addObject:view2];
-    UIView *view3 = [[UIView alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.frame) - 40) * 1, (CGRectGetHeight(self.view.frame) - 40) * 0, 40, 40)];
-    view3.backgroundColor = [self randomColor];
-    [self.view addSubview:view3];
-    [self.views2 addObject:view3];
+    NSMutableArray *fourSquares = [NSMutableArray array];
+    
+    for (int i = 0; i < 4; i++) {
+        UIView *view = [self createViewWith:i];
+        [self.view addSubview:view];
+        [fourSquares addObject:view];
+    }
+    
+    self.fourSquareViews = [fourSquares copy];
     
     UIImageView *imView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
     imView.backgroundColor = [UIColor clearColor];
@@ -63,12 +67,31 @@
     self.imView = imView;
 }
 
--(UIColor *)randomColor {
-    CGFloat r = (CGFloat)(arc4random_uniform(256)) / 255.f;
-    CGFloat g = (CGFloat)(arc4random_uniform(256)) / 255.f;
-    CGFloat b = (CGFloat)(arc4random_uniform(256)) / 255.f;
+- (UIView *)createViewWith:(CornerPosition)position {
+    CGPoint point;
+    CGFloat size = 40.f;
     
-    return [UIColor colorWithRed:r green:g blue:b alpha:1.f];
+    switch (position) {
+        case CornerPositionTopLeft:
+            point = CGPointMake(0, 0);
+            break;
+        case CornerPositionTopRight:
+            point = CGPointMake(CGRectGetWidth(self.view.frame) - size, 0);
+            break;
+        case CornerPositionBottomLeft:
+            point = CGPointMake(0, CGRectGetHeight(self.view.frame) - size);
+            break;
+        case CornerPositionBottomRight:
+            point = CGPointMake(CGRectGetWidth(self.view.frame) - size,
+                                CGRectGetHeight(self.view.frame) - size);
+    }
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(point.x,
+                                                            point.y,
+                                                            size,
+                                                            size)];
+    view.backgroundColor = [UIColor randomColor];
+    return view;
 }
 
 - (void)moveViews:(NSMutableArray<UIView *> *)views {
@@ -124,7 +147,7 @@
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          view.center = CGPointMake(x, y);
-                         view.backgroundColor = [self randomColor];
+                         view.backgroundColor = [UIColor randomColor];
                          
                          CGAffineTransform scale = CGAffineTransformMakeScale(s, s);
                          CGAffineTransform rotation = CGAffineTransformMakeRotation(r);
@@ -145,41 +168,40 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [UIView animateWithDuration:5
-                          delay:0
-                        options: UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse
-                     animations:^{
-                         [self.views1 objectAtIndex:0].center = CGPointMake(CGRectGetWidth(self.view.bounds) - CGRectGetWidth([self.views1 objectAtIndex:0].frame) / 2, 20);
-                         [self.views1 objectAtIndex:0].backgroundColor = [self randomColor];
+    
+    for (int i = 0; i < self.views1.count; i++) {
+        [self animateView:self.views1[i] withOptions:[self optionsForIndex:i]];
     }
-                     completion:^(BOOL finished) {}];
-    [UIView animateWithDuration:5
-                          delay:0
-                        options: UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         [self.views1 objectAtIndex:1].center = CGPointMake(CGRectGetWidth(self.view.bounds) - CGRectGetWidth([self.views1 objectAtIndex:1].frame) / 2, 60);
-                         [self.views1 objectAtIndex:1].backgroundColor = [self randomColor];
-    }
-                     completion:^(BOOL finished) {}];
-    [UIView animateWithDuration:5
-                          delay:0
-                        options: UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         [self.views1 objectAtIndex:2].center = CGPointMake(CGRectGetWidth(self.view.bounds) - CGRectGetWidth([self.views1 objectAtIndex:2].frame) / 2, 100);
-                         [self.views1 objectAtIndex:2].backgroundColor = [self randomColor];
-    }
-                     completion:^(BOOL finished) {}];
-    [UIView animateWithDuration:5
-                          delay:0
-                        options: UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         [self.views1 objectAtIndex:3].center = CGPointMake(CGRectGetWidth(self.view.bounds) - CGRectGetWidth([self.views1 objectAtIndex:3].frame) / 2, 140);
-                         [self.views1 objectAtIndex:3].backgroundColor = [self randomColor];
-    }
-                     completion:^(BOOL finished) {}];
-    [self moveViews:self.views2];
+    
+    [self moveViews:self.fourSquareViews];
     [self moveImageView:self.imView];
 }
 
+- (UIViewAnimationOptions)optionsForIndex:(NSInteger)index {
+    switch (index) {
+        case 1:
+            return UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse;
+        case 2:
+            return UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
+            UIViewAnimationOptionCurveEaseIn;
+        case 3:
+            return UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
+            UIViewAnimationOptionCurveEaseOut;
+        default:
+            return UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
+            UIViewAnimationOptionCurveLinear;
+            break;
+    }
+}
+
+- (void)animateView:(UIView *)view withOptions:(UIViewAnimationOptions)options {
+    [UIView animateWithDuration:5
+                          delay:0
+                        options:options
+                     animations:^{
+                         view.center = CGPointMake(CGRectGetWidth(self.view.bounds) - CGRectGetWidth(view.frame) / 2,
+                                                   view.frame.origin.y);
+                     } completion:nil];
+}
 
 @end
