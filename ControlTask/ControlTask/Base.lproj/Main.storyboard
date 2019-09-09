@@ -21,14 +21,23 @@
                             <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CWs-pi-y6a" userLabel="Rotation">
                                 <rect key="frame" x="44" y="388" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="actionTransformSwitches:" destination="BYZ-38-t0r" eventType="valueChanged" id="fmD-O3-92Y"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Pda-P7-fQG">
                                 <rect key="frame" x="164" y="388" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="actionTransformSwitches:" destination="BYZ-38-t0r" eventType="valueChanged" id="DOw-x7-F8S"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mqY-MJ-DE8">
                                 <rect key="frame" x="286" y="388" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="actionTransformSwitches:" destination="BYZ-38-t0r" eventType="valueChanged" id="kBV-6h-Q76"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rotation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nN-ej-SrM">
                                 <rect key="frame" x="35" y="357" width="64" height="21"/>
@@ -84,11 +93,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="5nz-q1-nQy" id="Uhh-UN-UKV"/>
-                        <outlet property="rotationSwitch" destination="CWs-pi-y6a" id="98k-Wf-tte"/>
-                        <outlet property="scaleSwitch" destination="Pda-P7-fQG" id="x2f-i4-2Wg"/>
-                        <outlet property="speedSlider" destination="Wjm-93-SQA" id="uNW-WQ-He8"/>
-                        <outlet property="translationSwitch" destination="mqY-MJ-DE8" id="iCS-eK-L7S"/>
+                        <outlet property="imageView" destination="5nz-q1-nQy" id="mMG-ZE-qJb"/>
+                        <outlet property="rotationSwitch" destination="CWs-pi-y6a" id="cB7-qH-arJ"/>
+                        <outlet property="scaleSwitch" destination="Pda-P7-fQG" id="Lzg-NB-983"/>
+                        <outlet property="speedSlider" destination="Wjm-93-SQA" id="mP7-Ro-umX"/>
+                        <outlet property="translationSwitch" destination="mqY-MJ-DE8" id="ypb-RY-i2s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

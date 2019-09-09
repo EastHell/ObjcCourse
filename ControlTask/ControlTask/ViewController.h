@@ -10,12 +10,6 @@
 
 @interface ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UISlider *speedSlider;
-@property (weak, nonatomic) IBOutlet UISwitch *rotationSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *scaleSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *translationSwitch;
-
 - (IBAction)actionSegmentedControl:(UISegmentedControl *)sender;
 
 @end
