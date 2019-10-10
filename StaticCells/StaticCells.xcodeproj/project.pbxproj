@@ -13,6 +13,8 @@
 		1F197C7F23472A0A000F6DA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F197C7D23472A0A000F6DA5 /* LaunchScreen.storyboard */; };
 		1F197C8223472A0A000F6DA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F197C8123472A0A000F6DA5 /* main.m */; };
 		1FA7E1D5234F05E60075CEF1 /* InformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7E1D4234F05E60075CEF1 /* InformationViewController.m */; };
+		1FA7E1DB234FB1B30075CEF1 /* FieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7E1DA234FB1B30075CEF1 /* FieldValidator.m */; };
+		1FA7E1DF234FBAD70075CEF1 /* PhoneFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7E1DE234FBAD70075CEF1 /* PhoneFormatter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,13 @@
 		1F197C8123472A0A000F6DA5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1FA7E1D3234F05E60075CEF1 /* InformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationViewController.h; sourceTree = "<group>"; };
 		1FA7E1D4234F05E60075CEF1 /* InformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InformationViewController.m; sourceTree = "<group>"; };
+		1FA7E1D7234FB0070075CEF1 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		1FA7E1D8234FB0EE0075CEF1 /* IValidator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IValidator.h; sourceTree = "<group>"; };
+		1FA7E1D9234FB1B30075CEF1 /* FieldValidator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldValidator.h; sourceTree = "<group>"; };
+		1FA7E1DA234FB1B30075CEF1 /* FieldValidator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FieldValidator.m; sourceTree = "<group>"; };
+		1FA7E1DC234FBA710075CEF1 /* IPhoneFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPhoneFormatter.h; sourceTree = "<group>"; };
+		1FA7E1DD234FBAD70075CEF1 /* PhoneFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneFormatter.h; sourceTree = "<group>"; };
+		1FA7E1DE234FBAD70075CEF1 /* PhoneFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneFormatter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +76,13 @@
 				1F197C8123472A0A000F6DA5 /* main.m */,
 				1FA7E1D3234F05E60075CEF1 /* InformationViewController.h */,
 				1FA7E1D4234F05E60075CEF1 /* InformationViewController.m */,
+				1FA7E1D7234FB0070075CEF1 /* Constants.h */,
+				1FA7E1D8234FB0EE0075CEF1 /* IValidator.h */,
+				1FA7E1D9234FB1B30075CEF1 /* FieldValidator.h */,
+				1FA7E1DA234FB1B30075CEF1 /* FieldValidator.m */,
+				1FA7E1DC234FBA710075CEF1 /* IPhoneFormatter.h */,
+				1FA7E1DD234FBAD70075CEF1 /* PhoneFormatter.h */,
+				1FA7E1DE234FBAD70075CEF1 /* PhoneFormatter.m */,
 			);
 			path = StaticCells;
 			sourceTree = "<group>";
@@ -142,6 +158,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FA7E1D5234F05E60075CEF1 /* InformationViewController.m in Sources */,
+				1FA7E1DB234FB1B30075CEF1 /* FieldValidator.m in Sources */,
+				1FA7E1DF234FBAD70075CEF1 /* PhoneFormatter.m in Sources */,
 				1F197C8223472A0A000F6DA5 /* main.m in Sources */,
 				1F197C7423472A08000F6DA5 /* AppDelegate.m in Sources */,
 			);
