@@ -15,7 +15,6 @@
 		1FBAD81A235A43B700A0B7DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FBAD818235A43B700A0B7DF /* LaunchScreen.storyboard */; };
 		1FBAD81D235A43B700A0B7DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBAD81C235A43B700A0B7DF /* main.m */; };
 		1FC67A66235E0CB80050FFEA /* FileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC67A65235E0CB80050FFEA /* FileCell.m */; };
-		1FC67A692360179C0050FFEA /* AddFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC67A682360179C0050FFEA /* AddFolderViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +33,6 @@
 		1FBAD81C235A43B700A0B7DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1FC67A64235E0CB80050FFEA /* FileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileCell.h; sourceTree = "<group>"; };
 		1FC67A65235E0CB80050FFEA /* FileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileCell.m; sourceTree = "<group>"; };
-		1FC67A672360179C0050FFEA /* AddFolderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFolderViewController.h; sourceTree = "<group>"; };
-		1FC67A682360179C0050FFEA /* AddFolderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFolderViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +79,6 @@
 				1FBAD818235A43B700A0B7DF /* LaunchScreen.storyboard */,
 				1FBAD81B235A43B700A0B7DF /* Info.plist */,
 				1FBAD81C235A43B700A0B7DF /* main.m */,
-				1FC67A672360179C0050FFEA /* AddFolderViewController.h */,
-				1FC67A682360179C0050FFEA /* AddFolderViewController.m */,
 			);
 			path = TableViewNavigation;
 			sourceTree = "<group>";
@@ -157,7 +152,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FC67A692360179C0050FFEA /* AddFolderViewController.m in Sources */,
 				1FB7D6BB235B065C005C3B6A /* DirectoryDataSource.m in Sources */,
 				1FB7D6C3235D83EB005C3B6A /* DirectoryCell.m in Sources */,
 				1FBAD81D235A43B700A0B7DF /* main.m in Sources */,

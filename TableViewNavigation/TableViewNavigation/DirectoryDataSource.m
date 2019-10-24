@@ -114,12 +114,6 @@
         NSDictionary *attributes = [[NSFileManager defaultManager]
                                     attributesOfItemAtPath:path
                                     error:nil];
-        static NSDateFormatter *dateFormatter = nil;
-        
-        if (!dateFormatter) {
-            dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm"];
-        }
         
         [cell configureWithFile:fileName
                            size:[attributes fileSize]
