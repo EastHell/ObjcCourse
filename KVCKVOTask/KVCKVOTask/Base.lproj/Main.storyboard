@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3kN-eD-czf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="2rS-k7-kKJ">
+            <objects>
+                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="3kN-eD-czf" customClass="ViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="O8A-GU-jPT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="wYq-gQ-lwk">
+                            <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelTextFieldTableViewCell" id="OtO-lA-L13" customClass="LabelTextFieldTableViewCell">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OtO-lA-L13" id="bdo-As-ecl">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="506-Z4-GJk">
+                                            <rect key="frame" x="16" y="11.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d7b-65-vlQ">
+                                            <rect key="frame" x="74" y="7" width="285" height="30"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="OtO-lA-L13" id="pxM-1Y-jhK"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="506-Z4-GJk" firstAttribute="centerY" secondItem="bdo-As-ecl" secondAttribute="centerY" id="3Yi-Nj-GWN"/>
+                                        <constraint firstItem="506-Z4-GJk" firstAttribute="leading" secondItem="bdo-As-ecl" secondAttribute="leading" constant="16" id="Kq4-fm-i27"/>
+                                        <constraint firstAttribute="trailing" secondItem="d7b-65-vlQ" secondAttribute="trailing" constant="16" id="TN3-pQ-Xzy"/>
+                                        <constraint firstItem="d7b-65-vlQ" firstAttribute="centerY" secondItem="506-Z4-GJk" secondAttribute="centerY" id="jjC-ZN-StH"/>
+                                        <constraint firstItem="d7b-65-vlQ" firstAttribute="leading" secondItem="506-Z4-GJk" secondAttribute="trailing" constant="16" id="l2f-1h-x5i"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="506-Z4-GJk" id="4u6-cf-VFO"/>
+                                    <outlet property="textField" destination="d7b-65-vlQ" id="ndc-k7-cCH"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelSelectorTableViewCell" id="QHX-LK-OAU" customClass="LabelSelectorTableViewCell">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QHX-LK-OAU" id="f3x-am-AUm">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7j-Kb-Z01">
+                                            <rect key="frame" x="16" y="11.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="HIl-g8-oc3">
+                                            <rect key="frame" x="74" y="8" width="285" height="29"/>
+                                            <segments>
+                                                <segment title="Male"/>
+                                                <segment title="Female"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="segmentedValueChangedAction:" destination="QHX-LK-OAU" eventType="valueChanged" id="HG6-Md-ePJ"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="N7j-Kb-Z01" firstAttribute="leading" secondItem="f3x-am-AUm" secondAttribute="leading" constant="16" id="2yH-y1-8TZ"/>
+                                        <constraint firstItem="HIl-g8-oc3" firstAttribute="centerY" secondItem="N7j-Kb-Z01" secondAttribute="centerY" id="CAn-Qt-PB9"/>
+                                        <constraint firstAttribute="trailing" secondItem="HIl-g8-oc3" secondAttribute="trailing" constant="16" id="Prd-ig-E45"/>
+                                        <constraint firstItem="HIl-g8-oc3" firstAttribute="leading" secondItem="N7j-Kb-Z01" secondAttribute="trailing" constant="16" id="ufn-Wt-He8"/>
+                                        <constraint firstItem="N7j-Kb-Z01" firstAttribute="centerY" secondItem="f3x-am-AUm" secondAttribute="centerY" id="z8F-kU-IC3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="N7j-Kb-Z01" id="6vm-Ea-Kba"/>
+                                    <outlet property="segmentedControl" destination="HIl-g8-oc3" id="lL1-GP-0WW"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3kN-eD-czf" id="twe-zi-Khy"/>
+                            <outlet property="delegate" destination="3kN-eD-czf" id="reJ-fD-jhg"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ePG-i3-lGG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="37.600000000000001" y="91.304347826086968"/>
+        </scene>
+    </scenes>
+</document>
