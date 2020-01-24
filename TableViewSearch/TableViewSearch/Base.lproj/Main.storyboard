@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dox-5h-L8G">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="hcI-ht-yzj">
+            <objects>
+                <viewController id="dox-5h-L8G" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E72-e8-3L8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vhV-9K-ZV0">
+                                <rect key="frame" x="16" y="20" width="343" height="29"/>
+                                <segments>
+                                    <segment title="Name"/>
+                                    <segment title="Second Name"/>
+                                    <segment title="Month"/>
+                                </segments>
+                                <connections>
+                                    <action selector="actionValueChanged:" destination="dox-5h-L8G" eventType="valueChanged" id="Tvg-nK-2Am"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="viD-nC-NMm">
+                                <rect key="frame" x="0.0" y="56" width="375" height="611"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="c1n-pr-MMP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="dox-5h-L8G" id="8YC-Fs-UTb"/>
+                                    </connections>
+                                </searchBar>
+                                <connections>
+                                    <outlet property="dataSource" destination="dox-5h-L8G" id="Pyx-0H-hH7"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="viD-nC-NMm" firstAttribute="trailing" secondItem="HF7-Fk-gcU" secondAttribute="trailing" id="9lg-L5-kHY"/>
+                            <constraint firstItem="vhV-9K-ZV0" firstAttribute="leading" secondItem="HF7-Fk-gcU" secondAttribute="leading" constant="16" id="BYS-vs-KA0"/>
+                            <constraint firstItem="HF7-Fk-gcU" firstAttribute="trailing" secondItem="vhV-9K-ZV0" secondAttribute="trailing" constant="16" id="KwO-AH-3Vh"/>
+                            <constraint firstItem="viD-nC-NMm" firstAttribute="top" secondItem="vhV-9K-ZV0" secondAttribute="bottom" constant="8" id="WSL-4a-ZEJ"/>
+                            <constraint firstItem="viD-nC-NMm" firstAttribute="top" secondItem="vhV-9K-ZV0" secondAttribute="bottom" constant="8" id="fS3-Sf-rql"/>
+                            <constraint firstItem="vhV-9K-ZV0" firstAttribute="top" secondItem="HF7-Fk-gcU" secondAttribute="top" id="nkc-4H-nPG"/>
+                            <constraint firstItem="viD-nC-NMm" firstAttribute="bottom" secondItem="HF7-Fk-gcU" secondAttribute="bottom" id="rmj-bU-YzZ"/>
+                            <constraint firstItem="viD-nC-NMm" firstAttribute="leading" secondItem="HF7-Fk-gcU" secondAttribute="leading" id="xE2-FD-Hz6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HF7-Fk-gcU"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="c1n-pr-MMP" id="yJh-aD-3vW"/>
+                        <outlet property="segmentedControl" destination="vhV-9K-ZV0" id="iIv-FD-hAH"/>
+                        <outlet property="tableView" destination="viD-nC-NMm" id="TVv-rT-cPK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ltD-QU-p0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="152.80000000000001" y="-49.025487256371818"/>
+        </scene>
+    </scenes>
+</document>
