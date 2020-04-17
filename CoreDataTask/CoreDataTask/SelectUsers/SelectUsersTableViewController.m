@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.clearsSelectionOnViewWillAppear = NO;
+    
     self.tableView.rowHeight = 60.f;
     self.userListContainer = [[UserListContainer alloc] initWithTableView:self.tableView
                                                                   context:self.context];
@@ -72,7 +74,7 @@
     
     if ([self.users containsObject:user]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        [cell setSelected:YES];
+        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
     
     return cell;

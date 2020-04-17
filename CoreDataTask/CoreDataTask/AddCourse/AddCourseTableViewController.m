@@ -13,6 +13,7 @@
 #import "AddUserTableViewController.h"
 #import "UserTableViewCell.h"
 #import "SelectUsersTableViewController.h"
+#import "UserProfileTableViewController.h"
 
 @interface AddCourseTableViewController () <NSFetchedResultsControllerDelegate>
 
@@ -132,7 +133,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([indexPath isEqual:[NSIndexPath indexPathForRow:3 inSection:0]] ||
         [indexPath isEqual:[NSIndexPath indexPathForRow:4 inSection:0]] ||
-        [indexPath isEqual:[NSIndexPath indexPathForRow:0 inSection:1]]) {
+        indexPath.section == 1) {
         return YES;
     }
     return NO;
@@ -145,6 +146,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         [self addStudents];
     } else if ([indexPath isEqual:saveCourseIndexPath]) {
         [self saveCourse];
+    } else if (indexPath.section == 1 && indexPath.row > 0) {
+        NSIndexPath *offsetIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:0];
+        [self showProfileForStudent:[self.fetchedResultsController objectAtIndexPath:offsetIndexPath]];
     }
 }
 
@@ -238,6 +242,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         [self.backgroundContext save:nil];
     }];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)showProfileForStudent:(User *)student {
+    UserProfileTableViewController *vc = [[UserProfileTableViewController alloc] initWithUser:student];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)configureCells {
