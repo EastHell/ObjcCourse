@@ -72,7 +72,7 @@
     id<NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][0];
     switch (section) {
         case 0:
-            return self.cells.count;
+            return self.cells.count + 2;
         default:
             return 1 + [sectionInfo numberOfObjects];
     }
@@ -85,7 +85,29 @@
     
     switch (indexPath.section) {
         case 0:
+        {
+            if (indexPath.row == 3) {
+                if (self.course.teacher) {
+                    UserTableViewCell *userCell = [tableView dequeueReusableCellWithIdentifier:@"UserCell"];
+                    if (!cell) {
+                        userCell = [UserTableViewCell new];
+                        [userCell.nameLabel setText:[NSString stringWithFormat:@"%@ %@", self.course.teacher.firstName,
+                                                     self.course.teacher.lastName]];
+                        [userCell.emailLabel setText:self.course.teacher.email];
+                    }
+                    return userCell;
+                }
+                cell = [[LabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                 reuseIdentifier:@"LabelCell"];
+                [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+                [cell.textLabel setText:@"Select teacher"];
+                return cell;
+            }
+            if (indexPath.row == 4) {
+                return self.saveButtonCell;
+            }
             return self.cells[indexPath.row];
+        }
         default:
             if (indexPath.row == 0) {
                 return self.addStudentButtonCell;
@@ -142,6 +164,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSIndexPath *addStudentsIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     NSIndexPath *saveCourseIndexPath = [NSIndexPath indexPathForRow:4 inSection:0];
+    NSIndexPath *addTeacherIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     if ([indexPath isEqual:addStudentsIndexPath]) {
         [self addStudents];
     } else if ([indexPath isEqual:saveCourseIndexPath]) {
@@ -149,6 +172,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     } else if (indexPath.section == 1 && indexPath.row > 0) {
         NSIndexPath *offsetIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:0];
         [self showProfileForStudent:[self.fetchedResultsController objectAtIndexPath:offsetIndexPath]];
+    } else if ([indexPath isEqual:addTeacherIndexPath]) {
+        [self addTeacher];
     }
 }
 
@@ -222,8 +247,16 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 #pragma mark - Utility
 
-- (void)addStudents {
-    SelectUsersTableViewController *vc = [[SelectUsersTableViewController alloc] init];
+- (void)addTeacher {
+    
+    __weak UITableView *tableView = self.tableView;
+    SelectUsersTableViewController *vc = [[SelectUsersTableViewController alloc]
+                                          initWithType:SelectUsersTableViewControllerTypeAddTeacher
+                                          completionBlock:^{
+                                              NSIndexPath *path = [NSIndexPath indexPathForRow:3 inSection:0];
+                                              [tableView reloadRowsAtIndexPaths:@[path]
+                                                                    withRowAnimation:UITableViewRowAnimationAutomatic];
+                                          }];
     vc.course = self.course;
     vc.context = self.backgroundContext;
     
@@ -242,6 +275,20 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         [self.backgroundContext save:nil];
     }];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)addStudents {
+    SelectUsersTableViewController *vc = [[SelectUsersTableViewController alloc]
+                                          initWithType:SelectUsersTableViewControllerTypeAddStudents
+                                          completionBlock:nil];
+    vc.course = self.course;
+    vc.context = self.backgroundContext;
+    
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:vc];
+    [navVC setModalPresentationStyle:UIModalPresentationPopover];
+    [navVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentViewController:navVC animated:YES completion:nil];
 }
 
 - (void)showProfileForStudent:(User *)student {
@@ -264,15 +311,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     self.industryTextFieldCell = [[TextFieldTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                             reuseIdentifier:@"TextFieldCell"];
     [self.industryTextFieldCell.field setPlaceholder:@"Enter industry"];
-    self.teacherLabelCell = [[LabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                          reuseIdentifier:@"LabelCell"];
     
     self.saveButtonCell = [[LabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                     reuseIdentifier:@"LabelCell"];
     [self.saveButtonCell.label setText:@"Save"];
     
-    self.cells = @[self.nameTextFieldCell, self.subjectTextFieldCell, self.industryTextFieldCell,
-                              self.teacherLabelCell, self.saveButtonCell];
+    self.cells = @[self.nameTextFieldCell, self.subjectTextFieldCell, self.industryTextFieldCell];
     
     self.addStudentButtonCell = [[LabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                           reuseIdentifier:@"LabelCell"];
@@ -282,13 +326,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         [self.nameTextFieldCell.field setText:self.course.name];
         [self.subjectTextFieldCell.field setText:self.course.subject];
         [self.industryTextFieldCell.field setText:self.course.industry];
-        if (self.course.teacher) {
-            User *teacher = self.course.teacher;
-            [self.teacherLabelCell.label
-             setText:[NSString stringWithFormat:@"%@, %@", teacher.firstName, teacher.lastName]];
-        } else {
-            [self.teacherLabelCell.label setText:@"Select teacher"];
-        }
     }
 }
 
