@@ -33,6 +33,7 @@
                     abort();
                 }
             }];
+            _persistentContainer.viewContext.automaticallyMergesChangesFromParent = YES;
         }
     }
     

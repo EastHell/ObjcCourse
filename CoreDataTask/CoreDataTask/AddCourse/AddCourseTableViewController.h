@@ -1,8 +1,8 @@
 //
-//  AddUserTableViewController.h
+//  AddCourseTableViewController.h
 //  CoreDataTask
 //
-//  Created by Aleksandr on 24/02/2020.
+//  Created by Aleksandr on 17/03/2020.
 //  Copyright © 2020 Aleksandr Shushkov. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AddUserTableViewController : UITableViewController
+@interface AddCourseTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSManagedObjectID *objectID;
 

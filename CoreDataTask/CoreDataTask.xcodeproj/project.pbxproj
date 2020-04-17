@@ -14,11 +14,17 @@
 		1F06A95323FB0E7900275D4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F06A95123FB0E7900275D4A /* LaunchScreen.storyboard */; };
 		1F06A95623FB0E7A00275D4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F06A95523FB0E7A00275D4A /* main.m */; };
 		1F06A98423FC7E0200275D4A /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F06A98323FC7E0200275D4A /* CoreDataStack.m */; };
+		1F4A65072442018100947C0F /* SelectUsersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A65062442018100947C0F /* SelectUsersTableViewController.m */; };
 		1F6B894924041ADF005563E6 /* AddUserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B894824041ADF005563E6 /* AddUserTableViewController.m */; };
 		1F6B894D24041DF3005563E6 /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B894C24041DF3005563E6 /* TextFieldTableViewCell.m */; };
 		1F6B895024043204005563E6 /* ButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B894F24043204005563E6 /* ButtonTableViewCell.m */; };
 		1F6B895724051E86005563E6 /* UsersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B895624051E86005563E6 /* UsersTableViewController.m */; };
 		1F6B895A24055FC0005563E6 /* LabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B895924055FC0005563E6 /* LabelTableViewCell.m */; };
+		1F906CA7242139A000211A05 /* CoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F906CA6242139A000211A05 /* CoursesTableViewController.m */; };
+		1F906CAB242139D900211A05 /* AddCourseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F906CAA242139D900211A05 /* AddCourseTableViewController.m */; };
+		1FB4D6E224118F8D00E4C774 /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4D6E124118F8D00E4C774 /* UserTableViewCell.m */; };
+		1FB68E2A2448D6FC008F284F /* UserProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E292448D6FC008F284F /* UserProfileTableViewController.m */; };
+		1FB7D3852441F7C800415B43 /* UserListContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D3842441F7C800415B43 /* UserListContainer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +39,8 @@
 		1F06A95523FB0E7A00275D4A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1F06A98223FC7E0200275D4A /* CoreDataStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
 		1F06A98323FC7E0200275D4A /* CoreDataStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
+		1F4A65052442018100947C0F /* SelectUsersTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectUsersTableViewController.h; sourceTree = "<group>"; };
+		1F4A65062442018100947C0F /* SelectUsersTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectUsersTableViewController.m; sourceTree = "<group>"; };
 		1F6B894724041ADF005563E6 /* AddUserTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddUserTableViewController.h; sourceTree = "<group>"; };
 		1F6B894824041ADF005563E6 /* AddUserTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddUserTableViewController.m; sourceTree = "<group>"; };
 		1F6B894B24041DF3005563E6 /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewCell.h; sourceTree = "<group>"; };
@@ -43,6 +51,16 @@
 		1F6B895624051E86005563E6 /* UsersTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsersTableViewController.m; sourceTree = "<group>"; };
 		1F6B895824055FC0005563E6 /* LabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelTableViewCell.h; sourceTree = "<group>"; };
 		1F6B895924055FC0005563E6 /* LabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LabelTableViewCell.m; sourceTree = "<group>"; };
+		1F906CA5242139A000211A05 /* CoursesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoursesTableViewController.h; sourceTree = "<group>"; };
+		1F906CA6242139A000211A05 /* CoursesTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoursesTableViewController.m; sourceTree = "<group>"; };
+		1F906CA9242139D900211A05 /* AddCourseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCourseTableViewController.h; sourceTree = "<group>"; };
+		1F906CAA242139D900211A05 /* AddCourseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCourseTableViewController.m; sourceTree = "<group>"; };
+		1FB4D6E024118F8D00E4C774 /* UserTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
+		1FB4D6E124118F8D00E4C774 /* UserTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
+		1FB68E282448D6FC008F284F /* UserProfileTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserProfileTableViewController.h; sourceTree = "<group>"; };
+		1FB68E292448D6FC008F284F /* UserProfileTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserProfileTableViewController.m; sourceTree = "<group>"; };
+		1FB7D3832441F7C800415B43 /* UserListContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserListContainer.h; sourceTree = "<group>"; };
+		1FB7D3842441F7C800415B43 /* UserListContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserListContainer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +93,12 @@
 		1F06A94223FB0E7800275D4A /* CoreDataTask */ = {
 			isa = PBXGroup;
 			children = (
+				1FB68E272448D6CB008F284F /* UserProfile */,
+				1F4A65042442010800947C0F /* SelectUsers */,
 				1F6B895124051E4F005563E6 /* Users */,
 				1F6B894624041A69005563E6 /* AddUser */,
+				1F906CA42421398700211A05 /* Courses */,
+				1F906CA8242139C300211A05 /* AddCourse */,
 				1F6B894A24041DC7005563E6 /* Cells */,
 				1F06A98123FC7DE900275D4A /* CoreData */,
 				1F06A94323FB0E7800275D4A /* AppDelegate.h */,
@@ -96,8 +118,19 @@
 			children = (
 				1F06A98223FC7E0200275D4A /* CoreDataStack.h */,
 				1F06A98323FC7E0200275D4A /* CoreDataStack.m */,
+				1FB7D3832441F7C800415B43 /* UserListContainer.h */,
+				1FB7D3842441F7C800415B43 /* UserListContainer.m */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		1F4A65042442010800947C0F /* SelectUsers */ = {
+			isa = PBXGroup;
+			children = (
+				1F4A65052442018100947C0F /* SelectUsersTableViewController.h */,
+				1F4A65062442018100947C0F /* SelectUsersTableViewController.m */,
+			);
+			path = SelectUsers;
 			sourceTree = "<group>";
 		};
 		1F6B894624041A69005563E6 /* AddUser */ = {
@@ -118,6 +151,8 @@
 				1F6B894F24043204005563E6 /* ButtonTableViewCell.m */,
 				1F6B895824055FC0005563E6 /* LabelTableViewCell.h */,
 				1F6B895924055FC0005563E6 /* LabelTableViewCell.m */,
+				1FB4D6E024118F8D00E4C774 /* UserTableViewCell.h */,
+				1FB4D6E124118F8D00E4C774 /* UserTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -129,6 +164,33 @@
 				1F6B895624051E86005563E6 /* UsersTableViewController.m */,
 			);
 			path = Users;
+			sourceTree = "<group>";
+		};
+		1F906CA42421398700211A05 /* Courses */ = {
+			isa = PBXGroup;
+			children = (
+				1F906CA5242139A000211A05 /* CoursesTableViewController.h */,
+				1F906CA6242139A000211A05 /* CoursesTableViewController.m */,
+			);
+			path = Courses;
+			sourceTree = "<group>";
+		};
+		1F906CA8242139C300211A05 /* AddCourse */ = {
+			isa = PBXGroup;
+			children = (
+				1F906CA9242139D900211A05 /* AddCourseTableViewController.h */,
+				1F906CAA242139D900211A05 /* AddCourseTableViewController.m */,
+			);
+			path = AddCourse;
+			sourceTree = "<group>";
+		};
+		1FB68E272448D6CB008F284F /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				1FB68E282448D6FC008F284F /* UserProfileTableViewController.h */,
+				1FB68E292448D6FC008F284F /* UserProfileTableViewController.m */,
+			);
+			path = UserProfile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,13 +265,19 @@
 			files = (
 				1F6B894D24041DF3005563E6 /* TextFieldTableViewCell.m in Sources */,
 				1F06A98423FC7E0200275D4A /* CoreDataStack.m in Sources */,
+				1F4A65072442018100947C0F /* SelectUsersTableViewController.m in Sources */,
+				1FB4D6E224118F8D00E4C774 /* UserTableViewCell.m in Sources */,
+				1F906CA7242139A000211A05 /* CoursesTableViewController.m in Sources */,
 				1F6B894924041ADF005563E6 /* AddUserTableViewController.m in Sources */,
 				1F06A94E23FB0E7800275D4A /* CoreDataTask.xcdatamodeld in Sources */,
 				1F06A95623FB0E7A00275D4A /* main.m in Sources */,
+				1FB68E2A2448D6FC008F284F /* UserProfileTableViewController.m in Sources */,
 				1F06A94523FB0E7800275D4A /* AppDelegate.m in Sources */,
 				1F6B895A24055FC0005563E6 /* LabelTableViewCell.m in Sources */,
 				1F6B895724051E86005563E6 /* UsersTableViewController.m in Sources */,
+				1F906CAB242139D900211A05 /* AddCourseTableViewController.m in Sources */,
 				1F6B895024043204005563E6 /* ButtonTableViewCell.m in Sources */,
+				1FB7D3852441F7C800415B43 /* UserListContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

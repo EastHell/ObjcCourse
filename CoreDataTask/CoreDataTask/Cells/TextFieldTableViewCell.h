@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TextFieldTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) UILabel *label;
 @property (strong, nonatomic) UITextField *field;
 
 @end

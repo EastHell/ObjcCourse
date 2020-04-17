@@ -29,23 +29,14 @@
 
 - (void)setup {
     
-    self.label = [[UILabel alloc] init];
-    self.label.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.contentView addSubview:self.label];
-    
-    [self.label.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor].active = YES;
-    [self.label.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:16.f].active = YES;
-    [self.label.widthAnchor constraintEqualToAnchor:self.contentView.widthAnchor multiplier:0.5f].active = YES;
-    
-    
     self.field = [[UITextField alloc] init];
     self.field.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.field setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.field setBorderStyle:UITextBorderStyleNone];
     [self.contentView addSubview:self.field];
     
     [self.field.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor].active = YES;
-    [self.field.leadingAnchor constraintEqualToAnchor:self.label.trailingAnchor constant:5.f].active = YES;
-    [self.field.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-5.f].active = YES;
+    [self.field.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:16.f].active = YES;
+    [self.field.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-16.f].active = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

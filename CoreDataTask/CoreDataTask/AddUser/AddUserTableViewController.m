@@ -13,8 +13,13 @@
 
 @interface AddUserTableViewController ()
 
+@property (strong, nonatomic) NSManagedObjectContext *backgroundContext;
+@property (strong, nonatomic) User* user;
+@property (strong, nonatomic) TextFieldTableViewCell *firstNameTextFieldCell;
+@property (strong, nonatomic) TextFieldTableViewCell *lastNameTextFieldCell;
+@property (strong, nonatomic) TextFieldTableViewCell *emailTextFieldCell;
+@property (strong, nonatomic) LabelTableViewCell *saveButtonCell;
 @property (strong, nonatomic) NSArray<UITableViewCell *> *cells;
-@property (strong, nonatomic) NSPersistentContainer *persistentContainer;
 
 @end
 
@@ -25,7 +30,11 @@
     
     self.tableView.rowHeight = 60.f;
     
-    self.persistentContainer = [CoreDataStack defaultStack].persistentContainer;
+    self.backgroundContext = [CoreDataStack.defaultStack.persistentContainer newBackgroundContext];
+    
+    if (self.objectID) {
+        self.user = [self.backgroundContext objectWithID:self.objectID];
+    }
     
     [self configureCells];
 }
@@ -38,13 +47,13 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *reuseIdentifier = self.cells[indexPath.row].reuseIdentifier;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    cell = self.cells[indexPath.row];
+    UITableViewCell *cell = self.cells[indexPath.row];
     
     return cell;
 }
+
+#pragma mark - UITableViewDelegate
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 3) {
@@ -62,56 +71,111 @@
 #pragma mark - Utility
 
 - (void)save {
-    TextFieldTableViewCell *firstNameCell = (TextFieldTableViewCell *)self.cells[0];
-    NSString *firstName = firstNameCell.field.text;
-    TextFieldTableViewCell *lastNameCell = (TextFieldTableViewCell *)self.cells[1];
-    NSString *lastName = lastNameCell.field.text;
-    TextFieldTableViewCell *emailCell = (TextFieldTableViewCell *)self.cells[2];
-    NSString *email = emailCell.field.text;
-    [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull backContext) {
-        User *user;
-        if (self.objectID) {
-            user = [backContext objectWithID:self.objectID];
-        } else {
-            user = [NSEntityDescription insertNewObjectForEntityForName:@"User"
-                                                 inManagedObjectContext:backContext];
+    
+    NSString *firstName = self.firstNameTextFieldCell.field.text;
+    NSString *lastName = self.lastNameTextFieldCell.field.text;
+    NSString *email = self.emailTextFieldCell.field.text;
+    
+    bool failed = false;
+    
+    NSString *nameRegex = @"^[^\\cA-\\c_\\s][^\\cA-\\c_]+$";
+    NSPredicate *nameTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", nameRegex];
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    if (![nameTest evaluateWithObject:firstName]) {
+        
+        failed = true;
+        [UIView animateWithDuration:0.8
+                              delay:0
+                            options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             [UIView setAnimationRepeatCount:1];
+                             [self.firstNameTextFieldCell setBackgroundColor:[UIColor redColor]];
+                         }
+                         completion:^(BOOL finished) {
+                             [self.firstNameTextFieldCell setBackgroundColor:[UIColor clearColor]];
+                         }];
+    }
+    if (![nameTest evaluateWithObject:lastName]) {
+        
+        failed = true;
+        [UIView animateWithDuration:0.8
+                              delay:0
+                            options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             [UIView setAnimationRepeatCount:1];
+                             [self.lastNameTextFieldCell setBackgroundColor:[UIColor redColor]];
+                         }
+                         completion:^(BOOL finished) {
+                             [self.lastNameTextFieldCell setBackgroundColor:[UIColor clearColor]];
+                         }];
+    }
+    if (![emailTest evaluateWithObject:email]) {
+        
+        failed = true;
+        [UIView animateWithDuration:0.8
+                              delay:0
+                            options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             [UIView setAnimationRepeatCount:1];
+                             [self.emailTextFieldCell setBackgroundColor:[UIColor redColor]];
+                         }
+                         completion:^(BOOL finished) {
+                             [self.emailTextFieldCell setBackgroundColor:[UIColor clearColor]];
+                         }];
+    }
+    
+    if (failed) {
+        [self.saveButtonCell setSelected:NO animated:YES];
+        return;
+    }
+    
+    [self.backgroundContext performBlock:^{
+        if (!self.user) {
+            self.user = [NSEntityDescription insertNewObjectForEntityForName:@"User"
+                                                 inManagedObjectContext:self.backgroundContext];
         }
-        [user setFirstName:firstName];
-        [user setLastName:lastName];
-        [user setEmail:email];
-        [backContext save:nil];
+        [self.user setFirstName:firstName];
+        [self.user setLastName:lastName];
+        [self.user setEmail:email];
+        [self.backgroundContext save:nil];
     }];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)configureCells {
     
-    [self.tableView registerClass:[TextFieldTableViewCell class] forCellReuseIdentifier:@"TextFieldCell"];
-    [self.tableView registerClass:[LabelTableViewCell class] forCellReuseIdentifier:@"ButtonCell"];
-    
-    TextFieldTableViewCell *firstNameCell = [[TextFieldTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    self.firstNameTextFieldCell = [[TextFieldTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                                           reuseIdentifier:@"TextFieldCell"];
-    [firstNameCell.label setText:@"First name"];
-    [firstNameCell.field setPlaceholder:@"Enter first name"];
-    [firstNameCell.field setText:self.firstName];
+    [self.firstNameTextFieldCell.field setPlaceholder:@"Enter first name"];
     
-    TextFieldTableViewCell *lastNameCell = [[TextFieldTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    self.lastNameTextFieldCell = [[TextFieldTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                                          reuseIdentifier:@"TextFieldCell"];
-    [lastNameCell.label setText:@"Last name"];
-    [lastNameCell.field setPlaceholder:@"Enter last name"];
-    [lastNameCell.field setText:self.lastName];
+    [self.lastNameTextFieldCell.field setPlaceholder:@"Enter last name"];
     
-    TextFieldTableViewCell *emailCell = [[TextFieldTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    self.emailTextFieldCell = [[TextFieldTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                                       reuseIdentifier:@"TextFieldCell"];
-    [emailCell.label setText:@"Email"];
-    [emailCell.field setPlaceholder:@"Enter email"];
-    [emailCell.field setText:self.email];
+    [self.emailTextFieldCell.field setPlaceholder:@"Enter email"];
     
-    LabelTableViewCell *saveButtonCell = [[LabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    if (self.user) {
+        [self.firstNameTextFieldCell.field setText:self.user.firstName];
+        [self.lastNameTextFieldCell.field setText:self.user.lastName];
+        [self.emailTextFieldCell.field setText:self.user.email];
+    }
+    
+    self.saveButtonCell = [[LabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                                    reuseIdentifier:@"ButtonCell"];
-    [saveButtonCell.label setText:@"Save"];
+    [self.saveButtonCell.label setText:@"Save"];
+}
+
+- (NSArray<UITableViewCell *> *)cells {
+    if (!_cells) {
+        _cells = @[self.firstNameTextFieldCell, self.lastNameTextFieldCell, self.emailTextFieldCell, self.saveButtonCell];
+    }
     
-    self.cells = @[firstNameCell, lastNameCell, emailCell, saveButtonCell];
+    return _cells;
 }
 
 @end
