@@ -20,6 +20,9 @@
 @property (strong, nonatomic) TextFieldTableViewCell *emailTextFieldCell;
 @property (strong, nonatomic) LabelTableViewCell *saveButtonCell;
 @property (strong, nonatomic) NSArray<UITableViewCell *> *cells;
+@property (strong, nonatomic) NSArray<Course *> *teachCourses;
+@property (strong, nonatomic) NSArray<Course *> *studyCourses;
+@property (strong, nonatomic) NSArray<NSSortDescriptor *> *coursesSortDescriptors;
 
 @end
 
@@ -41,14 +44,79 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"User info";
+        case 1:
+            if (self.user.teachCourses.count > 0) {
+                return @"Teach";
+            }
+            break;
+        case 2:
+            if (self.user.studyCourses.count > 0) {
+                return @"Study";
+            }
+            break;
+    }
+    return nil;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.cells.count;
+    switch (section) {
+        case 0:
+            return self.cells.count;
+        case 1:
+            return self.user.teachCourses.count;
+        case 2:
+            return self.user.studyCourses.count;
+    }
+    return 0;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = self.cells[indexPath.row];
+    UITableViewCell *cell = nil;
+    
+    switch (indexPath.section) {
+        case 0:
+            cell = self.cells[indexPath.row];
+            break;
+        case 1:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                              reuseIdentifier:@"CourseCell"];
+            }
+            Course *course = self.teachCourses[indexPath.row];
+            [cell.textLabel setText:[NSString stringWithFormat:@"%@ %@", course.subject, course.name]];
+            [cell.detailTextLabel setText:course.industry];
+            break;
+        }
+            case 2:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                              reuseIdentifier:@"CourseCell"];
+            }
+            Course *course = self.studyCourses[indexPath.row];
+            [cell.textLabel setText:[NSString stringWithFormat:@"%@ %@", course.subject, course.name]];
+            if (course.teacher) {
+                [cell.detailTextLabel
+                 setText:[NSString stringWithFormat:@"%@, %@", course.teacher.firstName, course.teacher.lastName]];
+            } else {
+                [cell.detailTextLabel setText:@""];
+            }
+            break;
+        }
+    }
     
     return cell;
 }
@@ -177,5 +245,38 @@
     
     return _cells;
 }
+
+- (NSArray<Course *> *)teachCourses {
+    
+    if (!_teachCourses && self.user.teachCourses) {
+        _teachCourses = [self.user.teachCourses sortedArrayUsingDescriptors:self.coursesSortDescriptors];
+    }
+    
+    return _teachCourses;
+}
+
+- (NSArray<Course *> *)studyCourses {
+    
+    if (!_studyCourses && self.user.studyCourses) {
+        _studyCourses = [self.user.studyCourses sortedArrayUsingDescriptors:self.coursesSortDescriptors];
+    }
+    
+    return _studyCourses;
+}
+
+- (NSArray<NSSortDescriptor *> *)coursesSortDescriptors {
+    
+    if (!_coursesSortDescriptors) {
+        NSSortDescriptor *industrySort = [NSSortDescriptor sortDescriptorWithKey:@"industry" ascending:YES];
+        NSSortDescriptor *subjectSort = [NSSortDescriptor sortDescriptorWithKey:@"subject" ascending:YES];
+        NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+        
+        _coursesSortDescriptors = @[industrySort, subjectSort, nameSort];
+    }
+    
+    return _coursesSortDescriptors;
+}
+
+
 
 @end
