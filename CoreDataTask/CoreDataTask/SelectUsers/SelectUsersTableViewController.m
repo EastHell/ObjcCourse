@@ -16,23 +16,41 @@
 
 @property (strong, nonatomic) UserListContainer *userListContainer;
 @property (strong, nonatomic) NSMutableSet<User *> *users;
+@property (assign, nonatomic) SelectUsersTableViewControllerType type;
+@property (copy, nonatomic, nullable) void (^completionBlock)(void);
 
 @end
 
 @implementation SelectUsersTableViewController
 
+- (instancetype)initWithType:(SelectUsersTableViewControllerType)type
+             completionBlock:(void (^__nullable)(void))completionBlock
+{
+    self = [super init];
+    if (self) {
+        self.type = type;
+        self.completionBlock = completionBlock;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.clearsSelectionOnViewWillAppear = NO;
     
     self.tableView.rowHeight = 60.f;
     self.userListContainer = [[UserListContainer alloc] initWithTableView:self.tableView
                                                                   context:self.context];
-    self.users = [self.course.students mutableCopy];
     
     [self.tableView registerClass:[UserTableViewCell class] forCellReuseIdentifier:@"User"];
     [self.tableView setAllowsMultipleSelection:YES];
+    
+    if (self.type == SelectUsersTableViewControllerTypeAddStudents) {
+        self.users = [self.course.students mutableCopy];
+    } else {
+        self.users = self.course.teacher?[NSMutableSet setWithObject:self.course.teacher]:[NSMutableSet new];
+    }
+    
+    
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save"
                                                                               style:UIBarButtonItemStylePlain
@@ -48,9 +66,13 @@
 
 - (void)save:(id)sender {
     [self.context performBlock:^{
-        self.course.students = self.users;
+        if (self.type == SelectUsersTableViewControllerTypeAddStudents) {
+            self.course.students = self.users;
+        } else {
+            self.course.teacher = [self.users anyObject];
+        }
     }];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:self.completionBlock];
 }
 
 - (void)dismiss:(id)sender {
@@ -74,7 +96,6 @@
     
     if ([self.users containsObject:user]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
     
     return cell;
@@ -84,16 +105,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UserTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
     
-    [self.users addObject:[self.userListContainer userAtIndexPath:indexPath]];
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UserTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryNone;
+    if (cell.accessoryType == UITableViewCellAccessoryNone) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.users addObject:[self.userListContainer userAtIndexPath:indexPath]];
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [self.users removeObject:[self.userListContainer userAtIndexPath:indexPath]];
+    }
     
-    [self.users removeObject:[self.userListContainer userAtIndexPath:indexPath]];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

@@ -12,10 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class Course;
 
+typedef NS_ENUM(NSInteger, SelectUsersTableViewControllerType) {
+    SelectUsersTableViewControllerTypeAddStudents,          // Adding multiple students
+    SelectUsersTableViewControllerTypeAddTeacher            // Sdding single teacher
+};
+
 @interface SelectUsersTableViewController : UITableViewController
 
 @property (strong, nonatomic) Course *course;
 @property (strong, nonatomic) NSManagedObjectContext *context;
+
+- (instancetype)initWithType:(SelectUsersTableViewControllerType)type
+             completionBlock:(void (^__nullable)(void))completionBlock;
 
 @end
 
