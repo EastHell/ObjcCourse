@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class User;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UserProfileTableViewController : UITableViewController

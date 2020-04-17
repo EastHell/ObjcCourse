@@ -12,20 +12,15 @@
 @interface UserProfileTableViewController ()
 
 @property (strong, nonatomic) User *user;
+@property (strong, nonatomic) NSArray<NSString *> *userInfo;
+@property (strong, nonatomic) NSArray<Course *> *teachCourses;
+@property (strong, nonatomic) NSArray<Course *> *studyCourses;
 
 @end
 
 @implementation UserProfileTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
+#pragma mark - Initializers
 
 - (instancetype)initWithUser:(User *)user
 {
@@ -36,68 +31,138 @@
     return self;
 }
 
+#pragma mark - View
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.tableView.rowHeight = 60.f;
+    
+    self.tableView.allowsSelection = NO;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(back:)];
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"textCell"];
+}
+
+#pragma mark - Actions
+
+- (void)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"User";
+        case 1:
+            if (self.user.teachCourses.count > 0) {
+                return @"Teach courses";
+            }
+            break;
+        case 2:
+            if (self.user.studyCourses.count > 0) {
+                return @"Study courses";
+            }
+            break;
+        default:
+            return nil;
+    }
+    return nil;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return 3;
+        case 1:
+            return self.user.teachCourses.count;
+        case 2:
+            return self.user.studyCourses.count;
+        default:
+            return 0;
+    }
     return 0;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = nil;
     
-    // Configure the cell...
+    switch (indexPath.section) {
+        case 0:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+            [cell.textLabel setText:self.userInfo[indexPath.row]];
+            break;
+        }
+        case 1:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"courseCell"];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                              reuseIdentifier:@"courseCell"];
+                Course *course = self.teachCourses[indexPath.row];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", course.subject, course.name];
+                cell.detailTextLabel.text = course.industry;
+            }
+            break;
+        }
+        case 2:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"courseCell"];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                              reuseIdentifier:@"courseCell"];
+                Course *course = self.studyCourses[indexPath.row];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", course.subject, course.name];
+                cell.detailTextLabel.text = course.industry;
+            }
+            break;
+        }
+        default:
+            break;
+    }
     
     return cell;
 }
 
+#pragma mark - Utility
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (NSArray<NSString *> *)userInfo {
+    
+    if (!_userInfo && self.user) {
+        _userInfo = @[self.user.firstName, self.user.lastName, self.user.email];
+    }
+    
+    return _userInfo;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (NSArray<Course *> *)teachCourses {
+    
+    if (!_teachCourses && self.user) {
+        _teachCourses = [self.user.teachCourses allObjects];
+    }
+    
+    return _teachCourses;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (NSArray<Course *> *)studyCourses {
+    
+    if (!_studyCourses && self.user) {
+        _studyCourses = [self.user.studyCourses allObjects];
+    }
+    
+    return _studyCourses;
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
