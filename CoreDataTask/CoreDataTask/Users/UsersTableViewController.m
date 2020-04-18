@@ -36,6 +36,7 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     [self.tableView registerClass:[UserTableViewCell class] forCellReuseIdentifier:@"User"];
+    [self.navigationItem setTitle:@"User list"];
 }
 
 #pragma mark - Table view data source

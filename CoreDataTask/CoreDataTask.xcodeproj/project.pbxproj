@@ -24,6 +24,7 @@
 		1F906CAB242139D900211A05 /* AddCourseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F906CAA242139D900211A05 /* AddCourseTableViewController.m */; };
 		1FB4D6E224118F8D00E4C774 /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4D6E124118F8D00E4C774 /* UserTableViewCell.m */; };
 		1FB68E2A2448D6FC008F284F /* UserProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E292448D6FC008F284F /* UserProfileTableViewController.m */; };
+		1FB68E2D244AF6AE008F284F /* TeachersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E2C244AF6AE008F284F /* TeachersTableViewController.m */; };
 		1FB7D3852441F7C800415B43 /* UserListContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D3842441F7C800415B43 /* UserListContainer.m */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		1FB4D6E124118F8D00E4C774 /* UserTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
 		1FB68E282448D6FC008F284F /* UserProfileTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserProfileTableViewController.h; sourceTree = "<group>"; };
 		1FB68E292448D6FC008F284F /* UserProfileTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserProfileTableViewController.m; sourceTree = "<group>"; };
+		1FB68E2B244AF6AE008F284F /* TeachersTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeachersTableViewController.h; sourceTree = "<group>"; };
+		1FB68E2C244AF6AE008F284F /* TeachersTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeachersTableViewController.m; sourceTree = "<group>"; };
 		1FB7D3832441F7C800415B43 /* UserListContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserListContainer.h; sourceTree = "<group>"; };
 		1FB7D3842441F7C800415B43 /* UserListContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserListContainer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +96,7 @@
 		1F06A94223FB0E7800275D4A /* CoreDataTask */ = {
 			isa = PBXGroup;
 			children = (
+				1FB68E2E244AF6B3008F284F /* Teachers */,
 				1FB68E272448D6CB008F284F /* UserProfile */,
 				1F4A65042442010800947C0F /* SelectUsers */,
 				1F6B895124051E4F005563E6 /* Users */,
@@ -193,6 +197,15 @@
 			path = UserProfile;
 			sourceTree = "<group>";
 		};
+		1FB68E2E244AF6B3008F284F /* Teachers */ = {
+			isa = PBXGroup;
+			children = (
+				1FB68E2B244AF6AE008F284F /* TeachersTableViewController.h */,
+				1FB68E2C244AF6AE008F284F /* TeachersTableViewController.m */,
+			);
+			path = Teachers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -277,6 +290,7 @@
 				1F6B895724051E86005563E6 /* UsersTableViewController.m in Sources */,
 				1F906CAB242139D900211A05 /* AddCourseTableViewController.m in Sources */,
 				1F6B895024043204005563E6 /* ButtonTableViewCell.m in Sources */,
+				1FB68E2D244AF6AE008F284F /* TeachersTableViewController.m in Sources */,
 				1FB7D3852441F7C800415B43 /* UserListContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

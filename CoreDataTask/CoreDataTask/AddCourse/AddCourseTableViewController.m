@@ -44,9 +44,11 @@
     
     if (self.objectID) {
         self.course = [self.backgroundContext objectWithID:self.objectID];
+        self.navigationItem.title = @"Edit course";
     } else {
         self.course = [NSEntityDescription insertNewObjectForEntityForName:@"Course"
                                                     inManagedObjectContext:self.backgroundContext];
+        self.navigationItem.title = @"Add course";
     }
     
     [self configureCells];

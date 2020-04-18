@@ -38,11 +38,12 @@
                     <connections>
                         <segue destination="0iG-0C-UOv" kind="relationship" relationship="viewControllers" id="ay8-W6-geq"/>
                         <segue destination="4cb-Xm-1hs" kind="relationship" relationship="viewControllers" id="ird-Um-lFI"/>
+                        <segue destination="zfo-at-eXl" kind="relationship" relationship="viewControllers" id="n66-TD-vU0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PL7-zU-Zen" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2452" y="552"/>
+            <point key="canvasLocation" x="-2367" y="586"/>
         </scene>
         <!--Users Table View Controller-->
         <scene sceneID="ph9-IT-gLt">
@@ -122,6 +123,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mEV-g3-qa7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="28" y="1010"/>
+        </scene>
+        <!--Teachers-->
+        <scene sceneID="TA6-DX-KFT">
+            <objects>
+                <navigationController id="zfo-at-eXl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Teachers" id="Z9O-l3-oNP"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="p0B-jx-Imx">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="NUh-19-aMt" kind="relationship" relationship="rootViewController" id="Cx4-jQ-Adz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uMd-Pq-YKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-796" y="1836"/>
+        </scene>
+        <!--Teachers Table View Controller-->
+        <scene sceneID="pcW-9n-Rta">
+            <objects>
+                <tableViewController id="NUh-19-aMt" customClass="TeachersTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5Lu-8W-vdW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="MqM-Qh-xzC">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <connections>
+                            <outlet property="dataSource" destination="NUh-19-aMt" id="ovj-c6-mMo"/>
+                            <outlet property="delegate" destination="NUh-19-aMt" id="WRS-1F-hEQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="oTs-EE-9ic"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KyZ-Ra-32h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28" y="1836"/>
         </scene>
         <!--Add Course Table View Controller-->
         <scene sceneID="l2l-fj-7hh">

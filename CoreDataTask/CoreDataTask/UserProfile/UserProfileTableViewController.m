@@ -46,6 +46,8 @@
                                                                             action:@selector(back:)];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"textCell"];
+    
+    [self.navigationItem setTitle:@"User Info"];
 }
 
 #pragma mark - Actions
