@@ -35,8 +35,11 @@
     
     self.backgroundContext = [CoreDataStack.defaultStack.persistentContainer newBackgroundContext];
     
+    self.navigationItem.title = @"Add user";
+    
     if (self.objectID) {
         self.user = [self.backgroundContext objectWithID:self.objectID];
+        self.navigationItem.title = @"Edit user";
     }
     
     [self configureCells];

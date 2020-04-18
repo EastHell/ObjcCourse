@@ -46,11 +46,11 @@
     
     if (self.type == SelectUsersTableViewControllerTypeAddStudents) {
         self.users = [self.course.students mutableCopy];
+        self.navigationItem.title = @"Select students";
     } else {
         self.users = self.course.teacher?[NSMutableSet setWithObject:self.course.teacher]:[NSMutableSet new];
+        self.navigationItem.title = @"Select teacher";
     }
-    
-    
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save"
                                                                               style:UIBarButtonItemStylePlain

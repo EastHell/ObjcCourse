@@ -28,6 +28,7 @@
     self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = true;
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    self.navigationItem.title = @"Course list";
     
     [self initializeFetchedResultsController];
 }
