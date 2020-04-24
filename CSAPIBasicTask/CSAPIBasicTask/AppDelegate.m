@@ -25,7 +25,7 @@
     // Override point for customization after application launch.
     
     //PUT YOUR SERVICE TOKEN HERE
-    [AccessToken addToken:@""];
+    //[AccessToken addToken:@""];
     return YES;
 }
 

@@ -7,18 +7,22 @@
 //
 
 #import "User.h"
+#import <UIKit/UIKit.h>
 
 @implementation User
 
-- (instancetype)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName photoURL:(NSURL *)photoURL
-{
-    self = [super init];
-    if (self) {
-        _firstName = firstName;
-        _lastName = lastName;
-        _photoURL = photoURL;
-    }
-    return self;
++ (User *)userWithUserID:(NSString *)userID firstName:(NSString *)firstName lastName:(NSString *)lastName
+                      photoUrl:(NSString *)photoURL canAccessClosed:(BOOL)canAccessClosed isClosed:(BOOL)closed
+                     trackCode:(NSString *)trackCode {
+    User *newUser = [[User alloc] init];
+    newUser.userID = userID;
+    newUser.firstName = firstName;
+    newUser.lastName = lastName;
+    newUser.photoURL = photoURL;
+    newUser.canAccessClosed = canAccessClosed;
+    newUser.closed = closed;
+    newUser.trackCode = trackCode;
+    return newUser;
 }
 
 @end

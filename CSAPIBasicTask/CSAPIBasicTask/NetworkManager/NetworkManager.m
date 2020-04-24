@@ -28,14 +28,38 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
     return manager;
 }
 
+- (void)performRequestWithUrl:(NSString *)url onSuccess:(void (^)(NSData * _Nonnull data))sucess
+                    onFailure:(void (^)(NSError * _Nonnull error))failure {
+    
+    NSURL *requestURL = [NSURL URLWithString:url];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session
+                                      dataTaskWithURL:requestURL
+                                      completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response,
+                                                          NSError * _Nullable error) {
+                                          if (error) {
+                                              //NSLog(@"Request error: %@", error);
+                                              if (failure) {
+                                                  failure(error);
+                                              }
+                                          } else {
+                                              //NSLog(@"Request success");
+                                              if (sucess) {
+                                                  sucess(data);
+                                              }
+                                          }
+                                      }];
+    [dataTask resume];
+}
+
 - (void)performRequestWithUrl:(NSString *)url method:(NSString *)method
                    properties:(NSDictionary<NSString *,NSString *> *)properties
-                    onSuccess:(void (^)(NSDictionary * _Nonnull))sucess
-                    onFailure:(void (^)(NSError * _Nonnull))failure {
+                    onSuccess:(void (^)(NSData * _Nonnull data))sucess
+                    onFailure:(void (^)(NSError * _Nonnull error))failure {
     
     AccessToken *serviceToken = [AccessToken currentAcessToken];
     if (!serviceToken) {
-        NSLog(@"Service token not finded");
+        //NSLog(@"Service token not finded");
         if (failure) {
             NSError *error = [NSError errorWithDomain:NetworkManagerErrorDomain code:1
                                              userInfo:@{NSLocalizedDescriptionKey:@"Service token not finded"}];
@@ -46,8 +70,12 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
     
     NSMutableDictionary *propertiesWithToken = [properties mutableCopy];
     [propertiesWithToken setObject:serviceToken.token forKey:@"access_token"];
-    [self requestWithUrl:url method:method properties:propertiesWithToken onSuccess:^(NSDictionary * _Nonnull data) {
-        NSDictionary *error = [data objectForKey:@"error"];
+    [self requestWithUrl:url method:method properties:propertiesWithToken onSuccess:^(NSData * _Nonnull data) {
+        NSDictionary *json = [NSJSONSerialization
+                              JSONObjectWithData:data
+                              options:NSJSONReadingMutableContainers
+                              error:nil];
+        NSDictionary *error = [json objectForKey:@"error"];
         if (error) {
             NSInteger errorCode = [[error objectForKey:@"error_code"]
                                    integerValue];
@@ -55,11 +83,11 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
                 case 5:
                 case 28:
                 {
-                    NSLog(@"Service token not finded");
+                    //NSLog(@"Request with service token error");
                     if (failure) {
                         NSError *error = [NSError
                                           errorWithDomain:NetworkManagerErrorDomain code:errorCode
-                                          userInfo:@{NSLocalizedDescriptionKey:@"Service token not finded"}];
+                                          userInfo:@{NSLocalizedDescriptionKey:@"Request with service token error"}];
                         failure(error);
                     }
                 }
@@ -81,8 +109,8 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
     } onFailure:failure];
 }
 
-- (void)requestServiceTokenOnSuccess:(void (^)(NSDictionary * _Nonnull))sucess
-                           onFailure:(void (^)(NSError * _Nonnull))failure {
+- (void)requestServiceTokenOnSuccess:(void (^)(NSData * _Nonnull data))sucess
+                           onFailure:(void (^)(NSError * _Nonnull error))failure {
     NSDictionary<NSString *, NSString *> *tokenRequestProperties = @{
                                                                      @"client_id":@"PUT_YOUR_CLIENT_ID",
                                                                      @"client_secret":@"PUT_YOUR_CLIENT_SECRET",
@@ -96,7 +124,7 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
 
 - (void)requestWithUrl:(NSString *)url method:(NSString *)method
             properties:(NSDictionary<NSString *,NSString *> *)properties
-             onSuccess:(void (^)(NSDictionary * _Nonnull))sucess onFailure:(void (^)(NSError * _Nonnull))failure {
+             onSuccess:(void (^)(NSData * _Nonnull))sucess onFailure:(void (^)(NSError * _Nonnull))failure {
     
     NSMutableArray<NSString *> *propertiesAndValues = [NSMutableArray array];
     [properties
@@ -106,7 +134,7 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
     NSString *resultProperties = [propertiesAndValues componentsJoinedByString:@"&"];
     
     NSString *requestString = [NSString stringWithFormat:@"%@%@?%@", url, method, resultProperties];
-    NSLog(@"reqest: %@", requestString);
+    //NSLog(@"reqest: %@", requestString);
     NSURL *requestURL = [NSURL URLWithString:requestString];
     
     NSURLSession *session = [NSURLSession sharedSession];
@@ -115,18 +143,14 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
                                       completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response,
                                                           NSError * _Nullable error) {
                                           if (error) {
+                                              //NSLog(@"Request error: %@", error);
                                               if (failure) {
                                                   failure(error);
                                               }
-                                              NSLog(@"Error: %@", error);
                                           } else {
-                                              NSDictionary *json = [NSJSONSerialization
-                                                                    JSONObjectWithData:data
-                                                                    options:NSJSONReadingMutableContainers
-                                                                    error:nil];
-                                              NSLog(@"Answer\n%@", json);
+                                              //NSLog(@"Request success");
                                               if (sucess) {
-                                                  sucess(json);
+                                                  sucess(data);
                                               }
                                           }
                                       }];

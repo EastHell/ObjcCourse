@@ -41,10 +41,6 @@ static NSString *const KeychainStorageErrorDomain = @"com.KeychainStorageErrorDo
                                      userInfo:@{NSLocalizedDescriptionKey:@"Cannot add Item to Keychain"}];
         }
         return NO;
-    } else {
-        if (error) {
-            *error = nil;
-        }
     }
     return YES;
 }
@@ -63,11 +59,8 @@ static NSString *const KeychainStorageErrorDomain = @"com.KeychainStorageErrorDo
                                      userInfo:@{NSLocalizedDescriptionKey:@"Cannot find Item in Keychain"}];
         }
         return nil;
-    } else {
-        if (error) {
-            *error = nil;
-        }
     }
+    
     NSData *result = [NSData dataWithData:(__bridge NSData *)item];
     CFRelease(item);
     return result;
@@ -82,16 +75,13 @@ static NSString *const KeychainStorageErrorDomain = @"com.KeychainStorageErrorDo
                                  (id)kSecValueData:item
                                  };
     OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)query, (__bridge CFDictionaryRef)attributes);
+    
     if (status!=errSecSuccess || status!=errSecItemNotFound) {
         if (error) {
             *error = [NSError errorWithDomain:KeychainStorageErrorDomain code:status
                                      userInfo:@{NSLocalizedDescriptionKey:@"Cannot update Item in Keychain"}];
         }
         return NO;
-    } else {
-        if (error) {
-            *error = nil;
-        }
     }
     return YES;
 }
@@ -108,9 +98,6 @@ static NSString *const KeychainStorageErrorDomain = @"com.KeychainStorageErrorDo
                                      userInfo:@{NSLocalizedDescriptionKey:@"Cannot delete Item from Keychain"}];
         }
         return NO;
-    }
-    if (error) {
-        *error = nil;
     }
     return YES;
 }
