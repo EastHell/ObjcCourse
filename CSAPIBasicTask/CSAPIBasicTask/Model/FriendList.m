@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic) NetworkManager *networkManager;
 @property (strong, nonatomic) NSArray<User *> *friends;
-@property (strong, nonatomic) NSCache<NSString *, UIImage *> *photosCache;
 
 @end
 
@@ -26,7 +25,6 @@
     self = [super init];
     if (self) {
         _networkManager = [NetworkManager sharedNetwork];
-        _photosCache = [[NSCache alloc] init];
         _friends = [NSArray new];
     }
     return self;
@@ -45,25 +43,20 @@
                                  @"name_case":@"nom",
                                  @"v":@"5.103"
                                  };
-    [self.networkManager performRequestWithUrl:@"https://api.vk.com/method/" method:@"friends.get" properties:properties onSuccess:^(NSData * _Nonnull data) {
+    [self.networkManager performRequestWithUrl:@"https://api.vk.com/method/"
+                                        method:@"friends.get"
+                                    properties:properties
+                                     onSuccess:^(NSData * _Nonnull data) {
         NSDictionary *json = [NSJSONSerialization
                               JSONObjectWithData:data
                               options:NSJSONReadingMutableContainers
                               error:nil];
         
-        //NSLog(@"Requested friends json:%@", json);
-        
         NSDictionary *error = [json objectForKey:@"error"];
         if (error) {
-            /*NSInteger errorCode = [[error objectForKey:@"error_code"]
-                                          integerValue];
-            NSLog(@"Cannot request new friends. Error code: %zd", errorCode);*/
-            
             completion(NO, 0);
             return;
         }
-        
-        //NSLog(@"SUCCES YOU JSON:\n%@", json);
         
         NSDictionary *response = [json objectForKey:@"response"];
         NSArray<NSDictionary *> *users = [response objectForKey:@"items"];
@@ -74,7 +67,7 @@
             NSString *userID = [user objectForKey:@"id"];
             NSString *firstName = [user objectForKey:@"first_name"];
             NSString *lastName = [user objectForKey:@"last_name"];
-            NSString *photoUrl = [user objectForKey:@"photo_50"];
+            NSURL *photoUrl = [NSURL URLWithString:[user objectForKey:@"photo_50"]];
             BOOL canAccessClosed = [user objectForKey:@"can_access_closed"];
             BOOL closed = [user objectForKey:@"is_closed"];
             NSString *trackCode = [user objectForKey:@"track_code"];
@@ -87,7 +80,6 @@
         
         completion(YES, newUsers.count);
     } onFailure:^(NSError * _Nonnull error) {
-        //NSLog(@"FAILED ERROR:%@", error);
         completion(NO, 0);
     }];
 }
@@ -97,33 +89,7 @@
 }
 
 - (User *)userAtIndex:(NSUInteger)index {
-    
-    //todo:
-    // Extension for imageView
-    // Shared uiimage cache
-    
-    
-    User *user = self.friends[index];
-    
-    if ([self.photosCache objectForKey:user.userID]) {
-        
-        user.photo = [self.photosCache objectForKey:user.userID];
-        
-    } else {
-        
-        __weak FriendList *weakSelf = self;
-        [self.networkManager performRequestWithUrl:user.photoURL onSuccess:^(NSData * _Nonnull data) {
-            if (data) {
-                UIImage *image = [UIImage imageWithData:data];
-                [weakSelf.photosCache setObject:image forKey:user.userID];
-                user.photo = image;
-            }
-        } onFailure:^(NSError * _Nonnull error) {
-            //NSLog(@"Can't load image: %@", error);
-        }];
-        
-    }
-    return user;
+    return self.friends[index];
 }
 
 @end

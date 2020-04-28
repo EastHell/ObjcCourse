@@ -9,6 +9,7 @@
 #import "FriendListTableViewController.h"
 #import "User.h"
 #import "FriendList.h"
+#import "UserTableViewCell.h"
 
 @interface FriendListTableViewController ()
 
@@ -35,20 +36,22 @@
     
     self.navigationItem.title = @"Friend list";
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UserCell"];
+    [self.tableView registerClass:[UserTableViewCell class] forCellReuseIdentifier:@"UserCell"];
     
     __weak FriendListTableViewController *weakSelf = self;
-    [self.tableView performBatchUpdates:^{
-        [weakSelf.friendList loadMoreWithCompletion:^(BOOL success, NSUInteger count) {
-            NSMutableArray *newPaths = [NSMutableArray array];
-            for (NSUInteger i = 0; i < count; i++) {
-                [newPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-            }
-            [weakSelf.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-            [weakSelf.tableView reloadData];
-        }];
-    } completion:^(BOOL finished) {
-        //NSLog(@"Loaded");
+    
+    [self.friendList loadMoreWithCompletion:^(BOOL success, NSUInteger count) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.tableView performBatchUpdates:^{
+                NSMutableArray *newPaths = [NSMutableArray array];
+                for (NSUInteger i = 0; i < count; i++) {
+                    [newPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                }
+                [weakSelf.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+            } completion:^(BOOL finished) {
+                NSLog(@"completed");
+            }];
+        });
     }];
 }
 
@@ -61,28 +64,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
-    
-    cell.imageView.image = nil;
+    UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
     
     if (indexPath.row == self.friendList.count - 1) {
-        [tableView performBatchUpdates:^{
-            [self.friendList loadMoreWithCompletion:^(BOOL success, NSUInteger count) {
-                NSMutableArray *newPaths = [NSMutableArray array];
-                for (NSUInteger i = 0; i < count; i++) {
-                    [newPaths addObject:[NSIndexPath indexPathForRow:indexPath.row+i inSection:0]];
-                }
-                [tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-            }];
-        } completion:^(BOOL finished) {
-            //NSLog(@"Loaded");
+        [self.friendList loadMoreWithCompletion:^(BOOL success, NSUInteger count) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [tableView performBatchUpdates:^{
+                    NSMutableArray *newPaths = [NSMutableArray array];
+                    for (NSUInteger i = 0; i < count; i++) {
+                        [newPaths addObject:[NSIndexPath indexPathForRow:indexPath.row+i inSection:0]];
+                    }
+                    [tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+                } completion:^(BOOL finished) {
+                    NSLog(@"completed");
+                }];
+            });
         }];
     }
     
     User *user = [self.friendList userAtIndex:indexPath.row];
-    [cell.textLabel setTextAlignment:NSTextAlignmentLeft];
     cell.textLabel.text = [NSString stringWithFormat:@"%td %@ %@", indexPath.row, user.firstName, user.lastName];
-    cell.imageView.image = user.photo;
+    [cell addImageForUrl:user.photoURL];
     
     return cell;
 }

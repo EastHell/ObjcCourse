@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F2D12A92452F3BE00DC052F /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D12A82452F3BD00DC052F /* UserTableViewCell.m */; };
+		1F2D12B024544E0800DC052F /* ImageCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D12AF24544E0800DC052F /* ImageCacher.m */; };
+		1F2D12BA2455DA6700DC052F /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D12B92455DA6700DC052F /* UserTableViewCell.m */; };
 		1FB68E5F244C816C008F284F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E5E244C816C008F284F /* AppDelegate.m */; };
 		1FB68E67244C816D008F284F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FB68E66244C816D008F284F /* Assets.xcassets */; };
 		1FB68E6A244C816D008F284F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FB68E68244C816D008F284F /* LaunchScreen.storyboard */; };
@@ -33,8 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F2D12A72452F3BD00DC052F /* UserTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
-		1F2D12A82452F3BD00DC052F /* UserTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
+		1F2D12AE24544E0800DC052F /* ImageCacher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCacher.h; sourceTree = "<group>"; };
+		1F2D12AF24544E0800DC052F /* ImageCacher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCacher.m; sourceTree = "<group>"; };
+		1F2D12B82455DA6700DC052F /* UserTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
+		1F2D12B92455DA6700DC052F /* UserTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
 		1FB68E5A244C816C008F284F /* CSAPIBasicTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSAPIBasicTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FB68E5D244C816C008F284F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1FB68E5E244C816C008F284F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -77,11 +80,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F2D12A62452F39A00DC052F /* Cells */ = {
+		1F2D12AA24543F9900DC052F /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				1F2D12A72452F3BD00DC052F /* UserTableViewCell.h */,
-				1F2D12A82452F3BD00DC052F /* UserTableViewCell.m */,
+				1F2D12AE24544E0800DC052F /* ImageCacher.h */,
+				1F2D12AF24544E0800DC052F /* ImageCacher.m */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		1F2D12BB2455DA6B00DC052F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1F2D12B82455DA6700DC052F /* UserTableViewCell.h */,
+				1F2D12B92455DA6700DC052F /* UserTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -107,6 +119,7 @@
 		1FB68E5C244C816C008F284F /* CSAPIBasicTask */ = {
 			isa = PBXGroup;
 			children = (
+				1F2D12AA24543F9900DC052F /* Cache */,
 				1FB68E9C244EBCF6008F284F /* KeyChain */,
 				1FB68E7E244C8C88008F284F /* NetworkManager */,
 				1FB68E7D244C854A008F284F /* Model */,
@@ -124,7 +137,7 @@
 		1FB68E76244C82ED008F284F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1F2D12A62452F39A00DC052F /* Cells */,
+				1F2D12BB2455DA6B00DC052F /* Cells */,
 				1FB68E77244C839C008F284F /* FriendListTableViewController.h */,
 				1FB68E78244C839C008F284F /* FriendListTableViewController.m */,
 			);
@@ -272,7 +285,8 @@
 			files = (
 				1FB68E7C244C8544008F284F /* User.m in Sources */,
 				1FB68E79244C839C008F284F /* FriendListTableViewController.m in Sources */,
-				1F2D12A92452F3BE00DC052F /* UserTableViewCell.m in Sources */,
+				1F2D12B024544E0800DC052F /* ImageCacher.m in Sources */,
+				1F2D12BA2455DA6700DC052F /* UserTableViewCell.m in Sources */,
 				1FB68E87244D74F3008F284F /* FriendList.m in Sources */,
 				1FB68E6D244C816D008F284F /* main.m in Sources */,
 				1FB68E9B244DDC7E008F284F /* AccessToken.m in Sources */,

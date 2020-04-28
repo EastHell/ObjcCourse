@@ -12,7 +12,7 @@
 @implementation User
 
 + (User *)userWithUserID:(NSString *)userID firstName:(NSString *)firstName lastName:(NSString *)lastName
-                      photoUrl:(NSString *)photoURL canAccessClosed:(BOOL)canAccessClosed isClosed:(BOOL)closed
+                      photoUrl:(NSURL *)photoURL canAccessClosed:(BOOL)canAccessClosed isClosed:(BOOL)closed
                      trackCode:(NSString *)trackCode {
     User *newUser = [[User alloc] init];
     newUser.userID = userID;
