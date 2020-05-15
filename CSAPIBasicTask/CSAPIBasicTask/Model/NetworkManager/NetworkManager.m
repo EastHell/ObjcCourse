@@ -18,17 +18,56 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
 @implementation NetworkManager
 
 + (NetworkManager *)sharedNetwork {
-    static NetworkManager *manager = nil;
+  static NetworkManager *manager = nil;
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        manager = [[NetworkManager alloc] init];
-    });
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    manager = [[NetworkManager alloc] init];
+  });
     
-    return manager;
+  return manager;
 }
 
-- (void)performRequestWithUrl:(NSString *)url onSuccess:(void (^)(NSData * _Nonnull data))sucess
+- (void)performRequestWithUrl:(NSURL *)url
+                    onSuccess:(void (^)(NSData * _Nonnull))sucess
+                    onFailure:(void (^)(NSError * _Nonnull))failure {
+    
+  NSURLSession *session = [NSURLSession sharedSession];
+  
+  NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    
+    if (error) {
+      if (failure) {
+        failure(error);
+      }
+      NSLog(@"DEBUG NETWORK_MANAGER: request finished with error - %@", error);
+      return;
+    }
+    
+    if (response) {
+      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+      if (httpResponse.statusCode < 200 || httpResponse.statusCode>299) {
+        if (failure) {
+          NSString *description = [NSString stringWithFormat:@"HTTP Response status code %zd",
+                                   httpResponse.statusCode];
+          NSError *error = [NSError errorWithDomain:NetworkManagerErrorDomain
+                                               code:httpResponse.statusCode
+                                           userInfo:@{NSLocalizedDescriptionKey:description}];
+          failure(error);
+        }
+        return;
+      }
+    }
+    
+    if (sucess) {
+      sucess(data);
+    }
+  }];
+  
+  [dataTask resume];
+}
+
+/*- (void)performRequestWithUrl:(NSString *)url onSuccess:(void (^)(NSData * _Nonnull data))sucess
                     onFailure:(void (^)(NSError * _Nonnull error))failure {
     
     NSURL *requestURL = [NSURL URLWithString:url];
@@ -155,6 +194,6 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
                                           }
                                       }];
     [dataTask resume];
-}
+}*/
 
 @end
