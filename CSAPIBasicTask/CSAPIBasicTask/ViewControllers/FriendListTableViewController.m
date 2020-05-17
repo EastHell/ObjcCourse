@@ -10,6 +10,7 @@
 #import "User.h"
 #import "FriendList.h"
 #import "ImageCacher.h"
+#import "NetworkManager.h"
 
 @interface FriendListTableViewController ()
 
@@ -38,7 +39,7 @@
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UserCell"];
     
-    [self loadMoreUsersAfterRow:0];
+    [self loadMoreUsersFromRow:0];
 }
 
 #pragma mark - Table view data source
@@ -50,51 +51,42 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
-    
-    cell.imageView.image = nil;
-    
-    if (indexPath.row == self.friendList.count - 1) {
-        [self loadMoreUsersAfterRow:indexPath.row];
-    }
-    
-    /*if (cell.dataTask) {
-        [cell.dataTask cancel];
-    }*/
-    
-    
-    User *user = [self.friendList userAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%td %@ %@", indexPath.row, user.firstName, user.lastName];
-    
-    //UIImage *img = [[ImageCacher sharedImageCacher] getImageForUrl:user.photoURL];
-    
-    /*if (img) {
-        cell.imageView.image = img;
-    } else {
-        cell.dataTask = [[NSURLSession sharedSession]
-                         dataTaskWithURL:user.photoURL
-                         completionHandler:^(NSData * _Nullable data,
-                                             NSURLResponse * _Nullable response,
-                                             NSError * _Nullable error) {
-                             dispatch_async(dispatch_get_main_queue(), ^{
-                                 if (!error) {
-                                     UIImage *tmpImg = [UIImage imageWithData:data];
-                                     [[ImageCacher sharedImageCacher] cacheImage:tmpImg forUrl:user.photoURL];
-                                     [tableView performBatchUpdates:^{
-                                         cell.imageView.image = tmpImg;
-                                     } completion:nil];
-                                 }
-                             });
-                         }];
-        [cell.dataTask resume];
-    }*/
-    
-    return cell;
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
+  
+  if (indexPath.row == self.friendList.count - 1) {
+      [self loadMoreUsersFromRow:indexPath.row+1];
+  }
+  
+  User *user = [self.friendList userAtIndex:indexPath.row];
+  cell.textLabel.text = [NSString stringWithFormat:@"%td %@ %@", indexPath.row, user.firstName, user.lastName];
+  
+  cell.imageView.image = [[ImageCacher sharedImageCacher] getImageForUrl:user.photoURL];
+  
+  if (!cell.imageView.image) {
+    [[NetworkManager sharedNetwork] performRequestWithUrl:user.photoURL onSuccess:^(NSData * _Nonnull data) {
+      
+      UIImage *image = [UIImage imageWithData:data];
+      
+      if (image) {
+        [[ImageCacher sharedImageCacher] cacheImage:image forUrl:user.photoURL];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          cell.imageView.image = image;
+          [cell setNeedsLayout];
+        });
+      }
+      
+    } onFailure:^(NSError * _Nonnull error) {
+      
+      NSLog(@"Image error: %@", error);
+    }];
+  }
+  
+  return cell;
 }
 
 #pragma mark - Utility
 
-- (void)loadMoreUsersAfterRow:(NSInteger)row {
+- (void)loadMoreUsersFromRow:(NSInteger)row {
   
   __weak UITableView *weakTableView = self.tableView;
   [self.friendList loadMoreWithCompletion:^(NSUInteger count) {
@@ -102,6 +94,8 @@
     if (weakTableView) {
       
       [weakTableView performBatchUpdates:^{
+        
+        NSLog(@"Count: %zd", count);
         
         NSMutableArray *newPaths = [NSMutableArray array];
         
@@ -112,18 +106,9 @@
         [weakTableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationAutomatic];
       } completion:^(BOOL finished) {
         
-        NSLog(@"New cells added");
       }];
     }
   }];
-}
-
-- (void)showLoader {
-    
-}
-
-- (void)hideLoader {
-    
 }
 
 @end

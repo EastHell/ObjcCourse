@@ -92,6 +92,8 @@
 		1FB53ABA2469B43300C0A673 /* VK API */ = {
 			isa = PBXGroup;
 			children = (
+				1FB68E99244DDC7E008F284F /* AccessToken.h */,
+				1FB68E9A244DDC7E008F284F /* AccessToken.m */,
 				1FB53ABC2469B4CE00C0A673 /* FriendsApi.h */,
 				1FB53ABD2469B4CE00C0A673 /* FriendsApi.m */,
 			);
@@ -160,8 +162,6 @@
 			children = (
 				1FB68E7F244C8CAD008F284F /* NetworkManager.h */,
 				1FB68E80244C8CAD008F284F /* NetworkManager.m */,
-				1FB68E99244DDC7E008F284F /* AccessToken.h */,
-				1FB68E9A244DDC7E008F284F /* AccessToken.m */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";

@@ -36,7 +36,7 @@
    friendsGetWithUserId:593208226
    order:FriendsApiOrderDefault
    listId:0
-   count:20
+   count:6
    offset:self.friends.count
    fields:FriendsApiFieldsPhoto50
    nameCase:FriendsApiNameCaseNom
@@ -66,7 +66,6 @@
        completion(users.count);
      });
    }];
-  
 }
 
 - (NSInteger)count {

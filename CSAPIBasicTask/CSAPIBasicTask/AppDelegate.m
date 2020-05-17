@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "FriendListTableViewController.h"
-#import "AccessToken.h"
+//#import "AccessToken.h"
 
 @interface AppDelegate ()
 
