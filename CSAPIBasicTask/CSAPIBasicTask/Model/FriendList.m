@@ -14,6 +14,7 @@
 @interface FriendList ()
 
 @property (strong, nonatomic) NSArray<User *> *friends;
+@property (strong, nonatomic) FriendsApi *friendsApi;
 
 @end
 
@@ -23,7 +24,8 @@
 {
     self = [super init];
     if (self) {
-        _friends = [NSArray new];
+      _friends = [NSArray new];
+      _friendsApi = [FriendsApi new];
     }
     return self;
 }
@@ -32,11 +34,11 @@
   
   __weak FriendList *weakSelf = self;
   
-  [[FriendsApi sharedApi]
+  [self.friendsApi
    friendsGetWithUserId:593208226
    order:FriendsApiOrderDefault
    listId:0
-   count:6
+   count:50
    offset:self.friends.count
    fields:FriendsApiFieldsPhoto50
    nameCase:FriendsApiNameCaseNom

@@ -13,8 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NetworkManager : NSObject
 
 + (NetworkManager *)sharedNetwork;
-- (void)performRequestWithUrl:(NSURL *)url onSuccess:(void (^)(NSData * _Nonnull data))sucess
+- (NSUInteger)performRequestWithUrl:(NSURL *)url onSuccess:(void (^)(NSData * _Nonnull data))sucess
                     onFailure:(void (^)(NSError * _Nonnull error))failure;
+- (void)cancelRequestWithIdentifier:(NSUInteger)identifier;
 
 @end
 

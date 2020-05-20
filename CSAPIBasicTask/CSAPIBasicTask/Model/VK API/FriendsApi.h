@@ -55,7 +55,6 @@ typedef NS_ENUM(NSUInteger, FriendsApiNameCase) {
 
 @interface FriendsApi : NSObject
 
-+ (FriendsApi *)sharedApi;
 - (void)friendsGetWithUserId:(NSInteger)userId
                                  order:(FriendsApiOrder)order
                                 listId:(NSUInteger)listId

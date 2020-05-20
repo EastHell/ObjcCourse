@@ -11,10 +11,12 @@
 #import "FriendList.h"
 #import "ImageCacher.h"
 #import "NetworkManager.h"
+#import "UserTableViewCell.h"
 
 @interface FriendListTableViewController ()
 
 @property (strong, nonatomic) FriendList *friendList;
+@property (assign, nonatomic) BOOL isLoading;
 
 @end
 
@@ -24,7 +26,8 @@
 {
     self = [super init];
     if (self) {
-        self.friendList = [FriendList new];
+      _friendList = [FriendList new];
+      _isLoading = NO;
     }
     return self;
 }
@@ -37,7 +40,7 @@
     
     self.navigationItem.title = @"Friend list";
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UserCell"];
+    [self.tableView registerClass:[UserTableViewCell class] forCellReuseIdentifier:@"UserCell"];
     
     [self loadMoreUsersFromRow:0];
 }
@@ -51,10 +54,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
+  UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
   
-  if (indexPath.row == self.friendList.count - 1) {
-      [self loadMoreUsersFromRow:indexPath.row+1];
+  if ((indexPath.row > self.friendList.count - 40) && !self.isLoading) {
+      [self loadMoreUsersFromRow:self.friendList.count];
   }
   
   User *user = [self.friendList userAtIndex:indexPath.row];
@@ -63,7 +66,7 @@
   cell.imageView.image = [[ImageCacher sharedImageCacher] getImageForUrl:user.photoURL];
   
   if (!cell.imageView.image) {
-    [[NetworkManager sharedNetwork] performRequestWithUrl:user.photoURL onSuccess:^(NSData * _Nonnull data) {
+    NSUInteger requestIdentifier = [[NetworkManager sharedNetwork] performRequestWithUrl:user.photoURL onSuccess:^(NSData * _Nonnull data) {
       
       UIImage *image = [UIImage imageWithData:data];
       
@@ -79,6 +82,12 @@
       
       NSLog(@"Image error: %@", error);
     }];
+    
+    if (!cell.onReuse) {
+      cell.onReuse = ^{
+        [[NetworkManager sharedNetwork] cancelRequestWithIdentifier:requestIdentifier];
+      };
+    }
   }
   
   return cell;
@@ -88,26 +97,25 @@
 
 - (void)loadMoreUsersFromRow:(NSInteger)row {
   
-  __weak UITableView *weakTableView = self.tableView;
+  self.isLoading = YES;
+  
   [self.friendList loadMoreWithCompletion:^(NSUInteger count) {
     
-    if (weakTableView) {
-      
-      [weakTableView performBatchUpdates:^{
-        
-        NSLog(@"Count: %zd", count);
-        
-        NSMutableArray *newPaths = [NSMutableArray array];
-        
-        for (NSUInteger i = 0; i < count; i++) {
-          [newPaths addObject:[NSIndexPath indexPathForRow:row+i inSection:0]];
-        }
-        
-        [weakTableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-      } completion:^(BOOL finished) {
-        
-      }];
+    NSLog(@"Count: %zd", count);
+    
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    
+    for (NSUInteger i = 0; i < count; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:row+i inSection:0]];
     }
+    
+    __weak FriendListTableViewController *weakSelf = self;
+    
+    [weakSelf.tableView performBatchUpdates:^{
+      [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    } completion:^(BOOL finished) {
+      weakSelf.isLoading = NO;
+    }];
   }];
 }
 

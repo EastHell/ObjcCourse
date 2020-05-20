@@ -27,7 +27,7 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
   return manager;
 }
 
-- (void)performRequestWithUrl:(NSURL *)url
+- (NSUInteger)performRequestWithUrl:(NSURL *)url
                     onSuccess:(void (^)(NSData * _Nonnull))sucess
                     onFailure:(void (^)(NSError * _Nonnull))failure {
     
@@ -64,6 +64,21 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
   }];
   
   [dataTask resume];
+  return dataTask.taskIdentifier;
+}
+
+- (void)cancelRequestWithIdentifier:(NSUInteger)identifier {
+  
+  [[NSURLSession sharedSession] getTasksWithCompletionHandler:^(NSArray<NSURLSessionDataTask *> * _Nonnull dataTasks, NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks) {
+    
+    [dataTasks enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+      
+      if (obj.taskIdentifier == identifier) {
+        [obj cancel];
+        *stop = YES;
+      }
+    }];
+  }];
 }
 
 @end

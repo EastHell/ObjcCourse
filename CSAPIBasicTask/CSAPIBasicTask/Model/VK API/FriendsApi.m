@@ -14,18 +14,6 @@ static NSString * const versionProperty = @"v=5.103";
 
 @implementation FriendsApi
 
-+ (FriendsApi *)sharedApi {
-  
-  static FriendsApi *api = nil;
-  
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    api = [[FriendsApi alloc] init];
-  });
-  
-  return api;
-}
-
 #pragma mark - Utility
 
 - (NSString *)userIdParameterWithUserId:(NSInteger)userId {
