@@ -38,7 +38,7 @@
    friendsGetWithUserId:593208226
    order:FriendsApiOrderDefault
    listId:0
-   count:50
+   count:20
    offset:self.friends.count
    fields:FriendsApiFieldsPhoto50
    nameCase:FriendsApiNameCaseNom

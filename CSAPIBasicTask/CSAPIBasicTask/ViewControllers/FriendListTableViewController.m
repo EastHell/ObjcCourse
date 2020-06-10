@@ -33,16 +33,17 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.tableView.rowHeight = 60.f;
-    [self.tableView setAllowsSelection:NO];
-    
-    self.navigationItem.title = @"Friend list";
-    
-    [self.tableView registerClass:[UserTableViewCell class] forCellReuseIdentifier:@"UserCell"];
-    
-    [self loadMoreUsersFromRow:0];
+  [super viewDidLoad];
+  
+  self.tableView.rowHeight = 70.f;
+  self.tableView.allowsSelection = NO;
+  self.tableView.showsVerticalScrollIndicator = NO;
+  
+  self.navigationItem.title = @"Friend list";
+  
+  [self.tableView registerClass:[UserTableViewCell class] forCellReuseIdentifier:@"UserCell"];
+  
+  [self loadMoreUsersFromRow:0];
 }
 
 #pragma mark - Table view data source
@@ -56,14 +57,14 @@
     
   UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
   
-  if ((indexPath.row > self.friendList.count - 40) && !self.isLoading) {
+  if ((indexPath.row >= self.friendList.count - 10) && !self.isLoading) {
       [self loadMoreUsersFromRow:self.friendList.count];
   }
   
   User *user = [self.friendList userAtIndex:indexPath.row];
-  cell.textLabel.text = [NSString stringWithFormat:@"%td %@ %@", indexPath.row, user.firstName, user.lastName];
+  cell.usernameLabel.text = [NSString stringWithFormat:@"%td %@ %@", indexPath.row, user.firstName, user.lastName];
   
-  cell.imageView.image = [[ImageCacher sharedImageCacher] getImageForUrl:user.photoURL];
+  [cell addImage:[[ImageCacher sharedImageCacher] getImageForUrl:user.photoURL]];
   
   if (!cell.imageView.image) {
     NSUInteger requestIdentifier = [[NetworkManager sharedNetwork] performRequestWithUrl:user.photoURL onSuccess:^(NSData * _Nonnull data) {
@@ -73,7 +74,8 @@
       if (image) {
         [[ImageCacher sharedImageCacher] cacheImage:image forUrl:user.photoURL];
         dispatch_async(dispatch_get_main_queue(), ^{
-          cell.imageView.image = image;
+          //[cell addImage:image];
+          [cell addImage:nil];
           [cell setNeedsLayout];
         });
       }
@@ -100,8 +102,6 @@
   self.isLoading = YES;
   
   [self.friendList loadMoreWithCompletion:^(NSUInteger count) {
-    
-    NSLog(@"Count: %zd", count);
     
     NSMutableArray *indexPaths = [NSMutableArray array];
     

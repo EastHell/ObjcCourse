@@ -75,6 +75,7 @@ static NSString *const NetworkManagerErrorDomain = @"com.NetworkManagerErrorDoma
       
       if (obj.taskIdentifier == identifier) {
         [obj cancel];
+        NSLog(@"Request cancelled");
         *stop = YES;
       }
     }];
