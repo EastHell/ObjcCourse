@@ -7,17 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FriendListDataSource.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class User;
-
-@interface FriendList : NSObject
-
-@property (assign, nonatomic, readonly) NSInteger count;
-
-- (User *)userAtIndex:(NSUInteger)index;
-- (void)loadMoreWithCompletion:(void(^)(NSUInteger count))completion;
+@interface FriendList : NSObject <FriendListDataSource>
 
 @end
 

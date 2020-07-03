@@ -18,7 +18,7 @@
          canAccessClosed:(BOOL)canAccessClosed
                 isClosed:(BOOL)closed
                trackCode:(NSString *)trackCode {
-  
+    
     User *newUser = [[User alloc] init];
     newUser.userID = userID;
     newUser.firstName = firstName;

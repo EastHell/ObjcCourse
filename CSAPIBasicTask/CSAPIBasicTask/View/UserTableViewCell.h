@@ -12,8 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UserTableViewCell : UITableViewCell
 
-@property (strong, nonatomic, nullable) void(^onReuse)(void);
-@property (strong, nonatomic) UILabel *usernameLabel;
+- (void)configureWithUserName:(NSString *)userName;
 - (void)addImage:(UIImage *)image;
 
 @end

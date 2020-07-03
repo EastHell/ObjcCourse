@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F2D12B024544E0800DC052F /* ImageCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D12AF24544E0800DC052F /* ImageCacher.m */; };
+		1F70C9742498E8F100014DEE /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F70C9732498E8F100014DEE /* ImageCache.m */; };
 		1FB53ABE2469B4CE00C0A673 /* FriendsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB53ABD2469B4CE00C0A673 /* FriendsApi.m */; };
 		1FB53AC32475500500C0A673 /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB53AC22475500500C0A673 /* UserTableViewCell.m */; };
 		1FB68E5F244C816C008F284F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E5E244C816C008F284F /* AppDelegate.m */; };
@@ -35,8 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F2D12AE24544E0800DC052F /* ImageCacher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCacher.h; sourceTree = "<group>"; };
-		1F2D12AF24544E0800DC052F /* ImageCacher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCacher.m; sourceTree = "<group>"; };
+		1F1BBD6724922B4C00281D06 /* FriendListDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendListDataSource.h; sourceTree = "<group>"; };
+		1F70C9722498E8F100014DEE /* ImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
+		1F70C9732498E8F100014DEE /* ImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		1FB53ABC2469B4CE00C0A673 /* FriendsApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsApi.h; sourceTree = "<group>"; };
 		1FB53ABD2469B4CE00C0A673 /* FriendsApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsApi.m; sourceTree = "<group>"; };
 		1FB53AC12475500500C0A673 /* UserTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
@@ -86,8 +87,8 @@
 		1F2D12AA24543F9900DC052F /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				1F2D12AE24544E0800DC052F /* ImageCacher.h */,
-				1F2D12AF24544E0800DC052F /* ImageCacher.m */,
+				1F70C9722498E8F100014DEE /* ImageCache.h */,
+				1F70C9732498E8F100014DEE /* ImageCache.m */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -134,7 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				1FB68E7D244C854A008F284F /* Model */,
-				1FB68E76244C82ED008F284F /* ViewControllers */,
+				1FB68E76244C82ED008F284F /* Controller */,
 				1FB53AC024754FB400C0A673 /* View */,
 				1FB68E5D244C816C008F284F /* AppDelegate.h */,
 				1FB68E5E244C816C008F284F /* AppDelegate.m */,
@@ -146,13 +147,13 @@
 			path = CSAPIBasicTask;
 			sourceTree = "<group>";
 		};
-		1FB68E76244C82ED008F284F /* ViewControllers */ = {
+		1FB68E76244C82ED008F284F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				1FB68E77244C839C008F284F /* FriendListTableViewController.h */,
 				1FB68E78244C839C008F284F /* FriendListTableViewController.m */,
 			);
-			path = ViewControllers;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		1FB68E7D244C854A008F284F /* Model */ = {
@@ -166,6 +167,7 @@
 				1FB68E7B244C8544008F284F /* User.m */,
 				1FB68E85244D74F3008F284F /* FriendList.h */,
 				1FB68E86244D74F3008F284F /* FriendList.m */,
+				1F1BBD6724922B4C00281D06 /* FriendListDataSource.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,9 +302,9 @@
 				1FB68E79244C839C008F284F /* FriendListTableViewController.m in Sources */,
 				1FB53ABE2469B4CE00C0A673 /* FriendsApi.m in Sources */,
 				1FB53AC32475500500C0A673 /* UserTableViewCell.m in Sources */,
-				1F2D12B024544E0800DC052F /* ImageCacher.m in Sources */,
 				1FB68E87244D74F3008F284F /* FriendList.m in Sources */,
 				1FB68E6D244C816D008F284F /* main.m in Sources */,
+				1F70C9742498E8F100014DEE /* ImageCache.m in Sources */,
 				1FB68E9B244DDC7E008F284F /* AccessToken.m in Sources */,
 				1FB68E81244C8CAD008F284F /* NetworkManager.m in Sources */,
 				1FB68E5F244C816C008F284F /* AppDelegate.m in Sources */,
