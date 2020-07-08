@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F6A5E4824B072EE00CE0A20 /* DetailedFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A5E4724B072EE00CE0A20 /* DetailedFriendTableViewController.m */; };
+		1F6A5E4B24B0753F00CE0A20 /* UsersApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A5E4A24B0753F00CE0A20 /* UsersApi.m */; };
+		1F6A5E4E24B5E08400CE0A20 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A5E4D24B5E08300CE0A20 /* User.m */; };
 		1F70C9742498E8F100014DEE /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F70C9732498E8F100014DEE /* ImageCache.m */; };
 		1FB53ABE2469B4CE00C0A673 /* FriendsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB53ABD2469B4CE00C0A673 /* FriendsApi.m */; };
 		1FB53AC32475500500C0A673 /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB53AC22475500500C0A673 /* UserTableViewCell.m */; };
@@ -15,7 +18,7 @@
 		1FB68E6A244C816D008F284F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FB68E68244C816D008F284F /* LaunchScreen.storyboard */; };
 		1FB68E6D244C816D008F284F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E6C244C816D008F284F /* main.m */; };
 		1FB68E79244C839C008F284F /* FriendListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E78244C839C008F284F /* FriendListTableViewController.m */; };
-		1FB68E7C244C8544008F284F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E7B244C8544008F284F /* User.m */; };
+		1FB68E7C244C8544008F284F /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E7B244C8544008F284F /* Friend.m */; };
 		1FB68E81244C8CAD008F284F /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E80244C8CAD008F284F /* NetworkManager.m */; };
 		1FB68E87244D74F3008F284F /* FriendList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E86244D74F3008F284F /* FriendList.m */; };
 		1FB68E8F244DCBAB008F284F /* CSAPIBasicTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB68E8E244DCBAB008F284F /* CSAPIBasicTaskTests.m */; };
@@ -36,6 +39,12 @@
 
 /* Begin PBXFileReference section */
 		1F1BBD6724922B4C00281D06 /* FriendListDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendListDataSource.h; sourceTree = "<group>"; };
+		1F6A5E4624B072EE00CE0A20 /* DetailedFriendTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailedFriendTableViewController.h; sourceTree = "<group>"; };
+		1F6A5E4724B072EE00CE0A20 /* DetailedFriendTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailedFriendTableViewController.m; sourceTree = "<group>"; };
+		1F6A5E4924B0753F00CE0A20 /* UsersApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsersApi.h; sourceTree = "<group>"; };
+		1F6A5E4A24B0753F00CE0A20 /* UsersApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsersApi.m; sourceTree = "<group>"; };
+		1F6A5E4C24B5E08300CE0A20 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		1F6A5E4D24B5E08300CE0A20 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		1F70C9722498E8F100014DEE /* ImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
 		1F70C9732498E8F100014DEE /* ImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		1FB53ABC2469B4CE00C0A673 /* FriendsApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsApi.h; sourceTree = "<group>"; };
@@ -51,8 +60,8 @@
 		1FB68E6C244C816D008F284F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1FB68E77244C839C008F284F /* FriendListTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendListTableViewController.h; sourceTree = "<group>"; };
 		1FB68E78244C839C008F284F /* FriendListTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendListTableViewController.m; sourceTree = "<group>"; };
-		1FB68E7A244C8544008F284F /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		1FB68E7B244C8544008F284F /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		1FB68E7A244C8544008F284F /* Friend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
+		1FB68E7B244C8544008F284F /* Friend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
 		1FB68E7F244C8CAD008F284F /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		1FB68E80244C8CAD008F284F /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		1FB68E85244D74F3008F284F /* FriendList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendList.h; sourceTree = "<group>"; };
@@ -100,6 +109,8 @@
 				1FB68E9A244DDC7E008F284F /* AccessToken.m */,
 				1FB53ABC2469B4CE00C0A673 /* FriendsApi.h */,
 				1FB53ABD2469B4CE00C0A673 /* FriendsApi.m */,
+				1F6A5E4924B0753F00CE0A20 /* UsersApi.h */,
+				1F6A5E4A24B0753F00CE0A20 /* UsersApi.m */,
 			);
 			path = "VK API";
 			sourceTree = "<group>";
@@ -152,6 +163,8 @@
 			children = (
 				1FB68E77244C839C008F284F /* FriendListTableViewController.h */,
 				1FB68E78244C839C008F284F /* FriendListTableViewController.m */,
+				1F6A5E4624B072EE00CE0A20 /* DetailedFriendTableViewController.h */,
+				1F6A5E4724B072EE00CE0A20 /* DetailedFriendTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -163,11 +176,13 @@
 				1FB68E9C244EBCF6008F284F /* KeyChain */,
 				1FB68E7E244C8C88008F284F /* NetworkManager */,
 				1FB53ABA2469B43300C0A673 /* VK API */,
-				1FB68E7A244C8544008F284F /* User.h */,
-				1FB68E7B244C8544008F284F /* User.m */,
+				1FB68E7A244C8544008F284F /* Friend.h */,
+				1FB68E7B244C8544008F284F /* Friend.m */,
 				1FB68E85244D74F3008F284F /* FriendList.h */,
 				1FB68E86244D74F3008F284F /* FriendList.m */,
 				1F1BBD6724922B4C00281D06 /* FriendListDataSource.h */,
+				1F6A5E4C24B5E08300CE0A20 /* User.h */,
+				1F6A5E4D24B5E08300CE0A20 /* User.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -298,15 +313,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FB68E7C244C8544008F284F /* User.m in Sources */,
+				1FB68E7C244C8544008F284F /* Friend.m in Sources */,
+				1F6A5E4824B072EE00CE0A20 /* DetailedFriendTableViewController.m in Sources */,
 				1FB68E79244C839C008F284F /* FriendListTableViewController.m in Sources */,
 				1FB53ABE2469B4CE00C0A673 /* FriendsApi.m in Sources */,
 				1FB53AC32475500500C0A673 /* UserTableViewCell.m in Sources */,
 				1FB68E87244D74F3008F284F /* FriendList.m in Sources */,
 				1FB68E6D244C816D008F284F /* main.m in Sources */,
 				1F70C9742498E8F100014DEE /* ImageCache.m in Sources */,
+				1F6A5E4E24B5E08400CE0A20 /* User.m in Sources */,
 				1FB68E9B244DDC7E008F284F /* AccessToken.m in Sources */,
 				1FB68E81244C8CAD008F284F /* NetworkManager.m in Sources */,
+				1F6A5E4B24B0753F00CE0A20 /* UsersApi.m in Sources */,
 				1FB68E5F244C816C008F284F /* AppDelegate.m in Sources */,
 				1FB68E98244DCFB5008F284F /* KeyChainStorage.m in Sources */,
 			);

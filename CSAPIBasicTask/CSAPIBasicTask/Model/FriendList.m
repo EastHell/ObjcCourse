@@ -7,13 +7,13 @@
 //
 
 #import "FriendList.h"
-#import "User.h"
+#import "Friend.h"
 #import "FriendsApi.h"
 #import <UIKit/UIKit.h>
 
 @interface FriendList ()
 
-@property (strong, nonatomic) NSArray<User *> *friends;
+@property (strong, nonatomic) NSArray<Friend *> *friends;
 @property (strong, nonatomic) FriendsApi *friendsApi;
 @property (assign, nonatomic) BOOL isLoading;
 
@@ -36,11 +36,11 @@
     return self.friends.count;
 }
 
-- (User *)userAtIndex:(NSUInteger)index {
+- (Friend *)friendAtIndex:(NSUInteger)index {
     return self.friends[index];
 }
 
-- (void)fetchUsersWithCompletion:(nonnull void (^)(NSUInteger))completion {
+- (void)fetchFriendsWithCompletion:(nonnull void (^)(NSUInteger))completion {
     
     if (self.isLoading) {
         return;
@@ -54,7 +54,7 @@
      friendsGetWithUserId:593208226
      order:FriendsApiOrderDefault
      listId:0
-     count:20
+     count:50
      offset:self.friends.count
      fields:FriendsApiFieldsPhoto50
      nameCase:FriendsApiNameCaseNom
@@ -71,7 +71,7 @@
          
          for (NSDictionary *user in users) {
              
-             User *newUser = [User userWithUserID:[user objectForKey:@"id"]
+             Friend *newUser = [Friend userWithUserID:[user objectForKey:@"id"]
                                         firstName:[user objectForKey:@"first_name"]
                                          lastName:[user objectForKey:@"last_name"]
                                          photoUrl:[NSURL URLWithString:[user objectForKey:@"photo_50"]]

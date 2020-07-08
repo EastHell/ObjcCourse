@@ -7,11 +7,12 @@
 //
 
 #import "FriendListTableViewController.h"
-#import "User.h"
+#import "Friend.h"
 #import "FriendListDataSource.h"
 #import "FriendList.h"
 #import "ImageCache.h"
 #import "UserTableViewCell.h"
+#import "DetailedFriendTableViewController.h"
 
 @interface FriendListTableViewController ()
 
@@ -20,7 +21,7 @@
 
 @end
 
-@implementation FriendListTableViewController
+@implementation FriendListTableViewController	
 
 - (instancetype)init
 {
@@ -37,7 +38,7 @@
     [super viewDidLoad];
     
     self.tableView.rowHeight = 70.f;
-    self.tableView.allowsSelection = NO;
+    self.tableView.allowsMultipleSelection = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     
     self.navigationItem.title = @"Friend list";
@@ -62,11 +63,12 @@
                                dequeueReusableCellWithIdentifier:NSStringFromClass([UserTableViewCell class])
                                forIndexPath:indexPath];
     
-    if (indexPath.row == self.friendList.count - 10) {
+    if (indexPath.row == self.friendList.count - 20) {
         [self loadMoreUsersFromRow:self.friendList.count];
     }
     
-    User *user = [self.friendList userAtIndex:indexPath.row];
+    Friend *user = [self.friendList friendAtIndex:indexPath.row];
+    NSLog(@"%@", user.userID);
     [cell configureWithUserName:[NSString stringWithFormat:@"%td %@ %@", indexPath.row, user.firstName, user.lastName]];
     
     [[ImageCache publicCache] loadWithUrl:user.photoURL completion:^(UIImage * _Nonnull image) {
@@ -79,11 +81,19 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    DetailedFriendTableViewController *vc = [DetailedFriendTableViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - Utility
 
 - (void)loadMoreUsersFromRow:(NSInteger)row {
     
-    [self.friendList fetchUsersWithCompletion:^(NSUInteger count) {
+    [self.friendList fetchFriendsWithCompletion:^(NSUInteger count) {
         
         NSMutableArray *indexPaths = [NSMutableArray array];
         

@@ -10,14 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class User;
+@class Friend;
 
 @protocol FriendListDataSource <NSObject>
 
 @property (assign, nonatomic, readonly) NSInteger count;
 
-- (User *)userAtIndex:(NSUInteger)index;
-- (void)fetchUsersWithCompletion:(void(^)(NSUInteger fetchedUsersCount))completion;
+- (Friend *)friendAtIndex:(NSUInteger)index;
+- (void)fetchFriendsWithCompletion:(void(^)(NSUInteger fetchedFriendsCount))completion;
 
 @end
 
