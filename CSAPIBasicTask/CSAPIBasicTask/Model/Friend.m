@@ -11,13 +11,13 @@
 
 @implementation Friend
 
-+ (Friend *)userWithUserID:(NSString *)userID
-               firstName:(NSString *)firstName
-                lastName:(NSString *)lastName
-                photoUrl:(NSURL *)photoURL
-         canAccessClosed:(BOOL)canAccessClosed
-                isClosed:(BOOL)closed
-               trackCode:(NSString *)trackCode {
++ (Friend *)friendWithUserID:(NSString *)userID
+                   firstName:(NSString *)firstName
+                    lastName:(NSString *)lastName
+                    photoUrl:(NSURL *)photoURL
+             canAccessClosed:(BOOL)canAccessClosed
+                    isClosed:(BOOL)closed
+                   trackCode:(NSString *)trackCode {
     
     Friend *newUser = [[Friend alloc] init];
     newUser.userID = userID;

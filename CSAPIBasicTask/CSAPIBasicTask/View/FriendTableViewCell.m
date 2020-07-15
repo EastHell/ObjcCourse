@@ -1,14 +1,14 @@
 //
-//  UserTableViewCell.m
+//  FriendTableViewCell.m
 //  CSAPIBasicTask
 //
 //  Created by Aleksandr on 20/05/2020.
 //  Copyright © 2020 Aleksandr Shushkov. All rights reserved.
 //
 
-#import "UserTableViewCell.h"
+#import "FriendTableViewCell.h"
 
-@interface UserTableViewCell ()
+@interface FriendTableViewCell ()
 
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UIImageView *avatarImageView;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation UserTableViewCell
+@implementation FriendTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

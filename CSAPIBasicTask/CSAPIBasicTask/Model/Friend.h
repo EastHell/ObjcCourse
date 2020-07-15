@@ -22,9 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL closed;
 @property (strong, nonatomic) NSString *trackCode;
 
-+ (Friend *)userWithUserID:(NSString *)userID firstName:(NSString *)firstName lastName:(NSString *)lastName
-                photoUrl:(NSURL *)photoURL canAccessClosed:(BOOL)canAccessClosed isClosed:(BOOL)closed
-               trackCode:(NSString *)trackCode;
++ (Friend *)friendWithUserID:(NSString *)userID
+                   firstName:(NSString *)firstName
+                    lastName:(NSString *)lastName
+                    photoUrl:(NSURL *)photoURL
+             canAccessClosed:(BOOL)canAccessClosed
+                    isClosed:(BOOL)closed
+                   trackCode:(NSString *)trackCode;
 
 @end
 

@@ -50,7 +50,9 @@
     UIImage *cachedImage = [self imageWithUrl:url];
     
     if (cachedImage) {
-        completion(cachedImage);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(cachedImage);
+        });        
         return;
     }
     

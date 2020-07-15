@@ -11,7 +11,7 @@
 #import "FriendListDataSource.h"
 #import "FriendList.h"
 #import "ImageCache.h"
-#import "UserTableViewCell.h"
+#import "FriendTableViewCell.h"
 #import "DetailedFriendTableViewController.h"
 
 @interface FriendListTableViewController ()
@@ -44,8 +44,8 @@
     self.navigationItem.title = @"Friend list";
     
     [self.tableView
-     registerClass:[UserTableViewCell class]
-     forCellReuseIdentifier:NSStringFromClass([UserTableViewCell class])];
+     registerClass:[FriendTableViewCell class]
+     forCellReuseIdentifier:NSStringFromClass([FriendTableViewCell class])];
     
     [self loadMoreUsersFromRow:0];
 }
@@ -59,8 +59,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UserTableViewCell *cell = [tableView
-                               dequeueReusableCellWithIdentifier:NSStringFromClass([UserTableViewCell class])
+    FriendTableViewCell *cell = [tableView
+                               dequeueReusableCellWithIdentifier:NSStringFromClass([FriendTableViewCell class])
                                forIndexPath:indexPath];
     
     if (indexPath.row == self.friendList.count - 20) {
@@ -68,7 +68,6 @@
     }
     
     Friend *user = [self.friendList friendAtIndex:indexPath.row];
-    NSLog(@"%@", user.userID);
     [cell configureWithUserName:[NSString stringWithFormat:@"%td %@ %@", indexPath.row, user.firstName, user.lastName]];
     
     [[ImageCache publicCache] loadWithUrl:user.photoURL completion:^(UIImage * _Nonnull image) {
@@ -85,7 +84,10 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    DetailedFriendTableViewController *vc = [DetailedFriendTableViewController new];
+    Friend *friend = [self.friendList friendAtIndex:indexPath.row];
+    
+    DetailedFriendTableViewController *vc = [[DetailedFriendTableViewController alloc] initWithUserId:friend.userID];
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
