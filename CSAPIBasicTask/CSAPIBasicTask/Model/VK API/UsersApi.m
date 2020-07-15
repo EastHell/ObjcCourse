@@ -7,10 +7,24 @@
 //
 
 #import "UsersApi.h"
+#import "NetworkManager.h"
+#import "AccessToken.h"
+
+static NSString * const versionProperty = @"v=5.103";
 
 @implementation UsersApi
 
+#pragma mark - Utility
 
+- (NSString *)userIDsPropertyWithUserIDs:(NSArray<NSString *> *)userIDs {
+    
+    return [NSString stringWithFormat:@"user_ids=%@", [userIDs componentsJoinedByString:@","]];
+}
+
+- (NSString *)fieldsPropertyWithFields:(NSArray<NSString *> *)fields {
+    
+    return [NSString stringWithFormat:@"fields=%@", [fields componentsJoinedByString:@","]];
+}
 
 - (NSString *)nameCasePropertyWithNameCase:(UsersApiNameCase)nameCase {
     
@@ -32,21 +46,23 @@
     }
 }
 
-- (NSString *)propertiesWithUserIds:(NSArray *)userIds
-                             fields:(UsersApiFields)fields
+
+
+- (NSString *)propertiesWithUserIDs:(NSArray<NSString *> *)userIds
+                             fields:(NSArray<NSString *> *)fields
                            nameCase:(UsersApiNameCase)nameCase {
     
     NSMutableArray *properties = [NSMutableArray array];
     
-    /*NSString *userIdsProperty = [self userIdsParameterWithUserId:userIds];
-    if (userIdsProperty) {
-        [properties addObject:userIdsProperty];
+    NSString *userIDsProperty = [self userIDsPropertyWithUserIDs:userIds];
+    if (userIDsProperty) {
+        [properties addObject:userIDsProperty];
     }
     
-    NSString *fieldsProperty = [self fieldsParameterForFields:fields];
+    NSString *fieldsProperty = [self fieldsPropertyWithFields:fields];
     if (fieldsProperty) {
         [properties addObject:fieldsProperty];
-    }*/
+    }
     
     NSString *nameCaseProperty = [self nameCasePropertyWithNameCase:nameCase];
     if (nameCaseProperty) {
@@ -56,20 +72,18 @@
     return [properties componentsJoinedByString:@"&"];
 }
 
-- (void)UsersGetWithUserIds:(NSArray *)userIds
-                     fields:(UsersApiFields)fields
+#pragma mark - Class methods
+
+- (void)UsersGetWithUserIds:(NSArray<NSString *> *)userIds
+                     fields:(NSArray<NSString *> *)fields
                    nameCase:(UsersApiNameCase)nameCase
-                  onSuccess:(void (^)(NSDictionary *json))success {
+                  onSuccess:(void (^)(NSArray *users))success {
     
     NSString *method = @"https://api.vk.com/method/users.get";
     
-    /*NSString *properties = [self propertiesWithUserId:userId
-                                                order:order
-                                               listId:listId
-                                                count:count
-                                               offset:offset
-                                               fields:fields
-                                             nameCase:nameCase];
+    NSString *properties = [self propertiesWithUserIDs:userIds
+                                                fields:fields
+                                              nameCase:nameCase];
     
     NSString *accessToken = [AccessToken currentAcessToken].token;
     if (!accessToken) {
@@ -97,7 +111,7 @@
      }
      onFailure:^(NSError * _Nonnull error) {
          NSLog(@"%@", error);
-     }];*/
+     }];
 }
 
 @end

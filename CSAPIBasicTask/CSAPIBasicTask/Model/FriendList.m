@@ -71,13 +71,13 @@
          
          for (NSDictionary *user in users) {
              
-             Friend *newUser = [Friend userWithUserID:[user objectForKey:@"id"]
-                                        firstName:[user objectForKey:@"first_name"]
-                                         lastName:[user objectForKey:@"last_name"]
-                                         photoUrl:[NSURL URLWithString:[user objectForKey:@"photo_50"]]
-                                  canAccessClosed:[user objectForKey:@"can_access_closed"]
-                                         isClosed:[user objectForKey:@"is_closed"]
-                                        trackCode:[user objectForKey:@"track_code"]];
+             Friend *newUser = [Friend friendWithUserID:[user objectForKey:@"id"]
+                                              firstName:[user objectForKey:@"first_name"]
+                                               lastName:[user objectForKey:@"last_name"]
+                                               photoUrl:[NSURL URLWithString:[user objectForKey:@"photo_50"]]
+                                        canAccessClosed:[user objectForKey:@"can_access_closed"]
+                                               isClosed:[user objectForKey:@"is_closed"]
+                                              trackCode:[user objectForKey:@"track_code"]];
              
              weakSelf.friends = [weakSelf.friends arrayByAddingObject:newUser];
          }
