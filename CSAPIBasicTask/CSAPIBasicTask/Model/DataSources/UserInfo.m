@@ -40,8 +40,8 @@
     __weak UserInfo *weakSelf = self;
     
     [self.usersApi
-     UsersGetWithUserIds:@[userID]
-     fields:@[@"sex", @"bdate", @"city", @"photo_max_orig"]
+     usersGetWithUserIds:@[userID]
+     fields:@[@"sex", @"bdate", @"city", @"photo_max_orig", @"counters"]
      nameCase:UsersApiNameCaseNom
      onSuccess:^(NSArray * _Nonnull users) {
          

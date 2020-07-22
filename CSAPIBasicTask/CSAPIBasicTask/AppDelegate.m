@@ -20,6 +20,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     FriendListTableViewController *vc = [FriendListTableViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    nav.navigationBar.tintColor = [UIColor whiteColor];
+    nav.navigationBar.barTintColor = [UIColor colorWithRed:0.27 green:0.5 blue:0.76 alpha:1];
+    nav.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
