@@ -170,7 +170,7 @@ static NSString * const versionProperty = @"v=5.103";
     return result;
 }
 
-- (NSString *)nameCasePropertyWithNameCase:(FriendsApiNameCase)nameCase {
+- (NSString *)nameCaseParameterWithNameCase:(FriendsApiNameCase)nameCase {
     
     switch (nameCase) {
         case FriendsApiNameCaseNom:
@@ -230,7 +230,7 @@ static NSString * const versionProperty = @"v=5.103";
         [properties addObject:fieldsProperty];
     }
     
-    NSString *nameCaseProperty = [self nameCasePropertyWithNameCase:nameCase];
+    NSString *nameCaseProperty = [self nameCaseParameterWithNameCase:nameCase];
     if (nameCaseProperty) {
         [properties addObject:nameCaseProperty];
     }

@@ -56,7 +56,7 @@
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
     self.activityIndicator.color = [UIColor redColor];
-    [self.contentView addSubview:self.activityIndicator];
+    [self.avatarImageView addSubview:self.activityIndicator];
     self.activityIndicator.hidesWhenStopped = YES;
     [self.activityIndicator startAnimating];
     self.activityIndicator.hidden = NO;
@@ -64,9 +64,6 @@
     [self.avatarImageView.centerXAnchor constraintEqualToAnchor:self.contentView.centerXAnchor].active = YES;
     [self.avatarImageView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:8.f].active = YES;
     [self.avatarImageView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-8.f].active = YES;
-    
-    [self.activityIndicator.centerXAnchor constraintEqualToAnchor:self.contentView.centerXAnchor].active = YES;
-    [self.activityIndicator.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor].active = YES;
 }
 
 @end

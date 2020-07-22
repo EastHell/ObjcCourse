@@ -21,6 +21,7 @@
     
     newUser.city = [city objectForKey:@"title"];
     newUser.photoMaxOrigURL = [NSURL URLWithString:[json objectForKey:@"photo_max_orig"]];
+    newUser.photo50URL = [NSURL URLWithString:[json objectForKey:@"photo_50"]];
     
     NSNumber *sex = [json objectForKey:@"sex"];
     newUser.sex = sex.unsignedIntegerValue;
@@ -28,6 +29,14 @@
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"dd.MM.YYYY"];
     newUser.birthDate = [dateFormatter dateFromString:[json objectForKey:@"bdate"]];
+    
+    NSDictionary *countersDictionary = [json objectForKey:@"counters"];
+    NSNumber *followers = [countersDictionary objectForKey:@"followers"];
+    NSNumber *subscriptions = [countersDictionary objectForKey:@"subscriptions"];
+    struct Counters counters = {.followers = followers.unsignedIntegerValue,
+        .subscriptions = subscriptions.unsignedIntegerValue
+    };
+    newUser.counters = counters;
     
     return newUser;
 }

@@ -22,10 +22,24 @@ typedef NS_ENUM(NSUInteger, UsersApiNameCase) {
 
 @interface UsersApi : NSObject
 
-- (void)UsersGetWithUserIds:(NSArray *)userIds
+- (void)usersGetWithUserIds:(NSArray *)userIds
                      fields:(NSArray<NSString *> *)fields
                    nameCase:(UsersApiNameCase)nameCase
                   onSuccess:(void (^)(NSArray *users))success;
+
+- (void)usersGetFollowersWithUserId:(NSString *)userID
+                             offset:(NSUInteger)offset
+                              count:(NSUInteger)count
+                             fields:(NSArray<NSString *> *)fields
+                           nameCase:(UsersApiNameCase)nameCase
+                          onSuccess:(void (^)(NSDictionary *json))success;
+
+- (void)userGetSubscriptionsWithUserId:(NSString *)userID
+                              extended:(BOOL)extended
+                                offset:(NSUInteger)offset
+                                 count:(NSUInteger)count
+                                fields:(NSArray<NSString *> *)fields
+                             onSuccess:(void (^)(NSDictionary *json))success;
 
 @end
 

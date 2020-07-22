@@ -1,33 +1,32 @@
 //
-//  FriendListTableViewController.m
+//  SubscriptionsTableViewController.m
 //  CSAPIBasicTask
 //
-//  Created by Aleksandr on 19/04/2020.
+//  Created by Aleksandr on 22/07/2020.
 //  Copyright © 2020 Aleksandr Shushkov. All rights reserved.
 //
 
-#import "FriendListTableViewController.h"
-#import "Friend.h"
-#import "FriendListDataSource.h"
-#import "FriendList.h"
-#import "ImageCache.h"
+#import "SubscriptionsTableViewController.h"
+#import "SubscriptionsList.h"
 #import "FriendTableViewCell.h"
-#import "DetailedFriendTableViewController.h"
+#import "ImageCache.h"
 
-@interface FriendListTableViewController ()
+@interface SubscriptionsTableViewController ()
 
-@property (strong, nonatomic) id<FriendListDataSource> friendList;
+@property (strong, nonatomic) id<SubscriptionsDataSource> subscriptions;
 @property (strong, nonatomic) NSOperationQueue *sharedOperationQueue;
+@property (strong, nonatomic) NSString *userID;
 
 @end
 
-@implementation FriendListTableViewController	
+@implementation SubscriptionsTableViewController
 
-- (instancetype)init
+- (instancetype)initWithUserID:(NSString *)userID
 {
     self = [super init];
     if (self) {
-        _friendList = [FriendList new];
+        _userID = userID;
+        _subscriptions = [[SubscriptionsList alloc] initWithUserID:userID];
         _sharedOperationQueue = [NSOperationQueue new];
         _sharedOperationQueue.maxConcurrentOperationCount = 1;
     }
@@ -41,7 +40,7 @@
     self.tableView.allowsMultipleSelection = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     
-    self.navigationItem.title = @"Friend list";
+    self.navigationItem.title = @"Subscriptions";
     
     [self.tableView
      registerClass:[FriendTableViewCell class]
@@ -49,29 +48,30 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self loadMoreUsersFromRow:0];
+    [self loadMoreSubscriptionsFromRow:0];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.friendList.count;
+    return self.subscriptions.count;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     FriendTableViewCell *cell = [tableView
-                               dequeueReusableCellWithIdentifier:NSStringFromClass([FriendTableViewCell class])
-                               forIndexPath:indexPath];
+                                 dequeueReusableCellWithIdentifier:NSStringFromClass([FriendTableViewCell class])
+                                 forIndexPath:indexPath];
     
-    if (indexPath.row == self.friendList.count - 20) {
-        [self loadMoreUsersFromRow:self.friendList.count];
+    if (indexPath.row == self.subscriptions.count - 20) {
+        [self loadMoreSubscriptionsFromRow:self.subscriptions.count];
     }
     
-    Friend *user = [self.friendList friendAtIndex:indexPath.row];
-    [cell configureWithUserName:[NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName]];
+    Subscription *subscription = [self.subscriptions subscriptionAtIndex:indexPath.row];
+    [cell configureWithUserName:subscription.name];
     
-    [[ImageCache publicCache] loadWithUrl:user.photoURL completion:^(UIImage * _Nonnull image) {
+    [[ImageCache publicCache] loadWithUrl:subscription.photo_50 completion:^(UIImage * _Nonnull image) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [cell addImage:image];
             [cell setNeedsLayout];
@@ -81,30 +81,19 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    Friend *friend = [self.friendList friendAtIndex:indexPath.row];
-    
-    DetailedFriendTableViewController *vc = [[DetailedFriendTableViewController alloc] initWithUserId:friend.userID];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 #pragma mark - Utility
 
-- (void)loadMoreUsersFromRow:(NSInteger)row {
+- (void)loadMoreSubscriptionsFromRow:(NSInteger)row {
     
-    [self.friendList fetchFriendsWithCompletion:^(NSUInteger count) {
+    [self.subscriptions fetchSubscriptionsWithCompletion:^(NSUInteger fetchedSubscriptionsCount) {
         
         NSMutableArray *indexPaths = [NSMutableArray array];
         
-        for (NSUInteger i = 0; i < count; i++) {
+        for (NSUInteger i = 0; i < fetchedSubscriptionsCount; i++) {
             [indexPaths addObject:[NSIndexPath indexPathForRow:row+i inSection:0]];
         }
         
-        __weak FriendListTableViewController *weakSelf = self;
+        __weak SubscriptionsTableViewController *weakSelf = self;
         
         [self.sharedOperationQueue addOperationWithBlock:^{
             dispatch_async(dispatch_get_main_queue(), ^{

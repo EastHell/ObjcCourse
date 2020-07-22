@@ -11,6 +11,8 @@
 #import "User.h"
 #import "ImageTableViewCell.h"
 #import "ImageCache.h"
+#import "FollowersTableViewController.h"
+#import "SubscriptionsTableViewController.h"
 
 @interface DetailedFriendTableViewController ()
 
@@ -49,9 +51,12 @@
     
     self.navigationItem.title = @"Friend bio";
     self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.tableView.estimatedRowHeight = 80.f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 #pragma mark - Table view data source
@@ -65,21 +70,33 @@
     return self.cells[indexPath.row];
 }
 
+#pragma marl - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == self.cells.count - 2) {
+        
+        FollowersTableViewController *vc = [[FollowersTableViewController alloc] initWithUserID:self.userId];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == self.cells.count - 1) {
+        
+        SubscriptionsTableViewController *vc = [[SubscriptionsTableViewController alloc] initWithUserID:self.userId];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+#pragma mark - Cells
+
 - (void)configureCellsWithUser:(User *)user {
     
     self.user = user;
     
-    if (user.firstName || user.lastName) {
-        
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        [self.cells addObject:cell];
-    }
-    
     if (user.photoMaxOrigURL) {
         
         ImageTableViewCell *cell = [[ImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         __weak UITableView *weakTableView = self.tableView;
         
@@ -102,8 +119,10 @@
         
         NSString *bdate = [dateFormatter stringFromDate:user.birthDate];
         
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = [NSString stringWithFormat:@"Birth date: %@", bdate];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        cell.textLabel.text = @"Birth date:";
+        cell.detailTextLabel.text = bdate;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.cells addObject:cell];
     }
     
@@ -111,17 +130,31 @@
         
         NSString *sex = user.sex == UserSexMale ? @"Male" : @"Female";
         
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = [NSString stringWithFormat:@"Sex: %@", sex];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        cell.textLabel.text = @"Sex:";
+        cell.detailTextLabel.text = sex;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.cells addObject:cell];
     }
     
     if (user.city) {
         
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = [NSString stringWithFormat:@"City: %@", user.city];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        cell.textLabel.text = @"City:";
+        cell.detailTextLabel.text = user.city;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.cells addObject:cell];
     }
+    
+    UITableViewCell *followersCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
+    followersCell.textLabel.text = @"Followers:";
+    followersCell.detailTextLabel.text = [NSString stringWithFormat:@"%lu", user.counters.followers];
+    [self.cells addObject:followersCell];
+    
+    UITableViewCell *subscriptionsCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
+    subscriptionsCell.textLabel.text = @"Subscriptions:";
+    subscriptionsCell.detailTextLabel.text = [NSString stringWithFormat:@"%lu", user.counters.subscriptions];
+    [self.cells addObject:subscriptionsCell];
 }
 
 @end
