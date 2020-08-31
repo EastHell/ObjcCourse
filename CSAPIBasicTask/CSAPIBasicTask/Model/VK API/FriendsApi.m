@@ -10,13 +10,17 @@
 #import "NetworkManager.h"
 #import "AccessToken.h"
 
-static NSString * const versionProperty = @"v=5.103";
+static NSString * const versionProperty = @"v=5.120";
 
 @implementation FriendsApi
 
 #pragma mark - Utility
 
 - (NSString *)userIdParameterWithUserId:(NSInteger)userId {
+    
+    if (!userId) {
+        return nil;
+    }
     
     NSString *result = [NSString stringWithFormat:@"user_id=%zd", userId];
     

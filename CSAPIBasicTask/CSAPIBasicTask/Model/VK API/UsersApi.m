@@ -10,7 +10,7 @@
 #import "NetworkManager.h"
 #import "AccessToken.h"
 
-static NSString * const versionProperty = @"v=5.103";
+static NSString * const versionProperty = @"v=5.120";
 
 @implementation UsersApi
 
@@ -18,10 +18,18 @@ static NSString * const versionProperty = @"v=5.103";
 
 - (NSString *)userIDsParameterWithUserIDs:(NSArray<NSString *> *)userIDs {
     
+    if (!userIDs) {
+        return nil;
+    }
+    
     return [NSString stringWithFormat:@"user_ids=%@", [userIDs componentsJoinedByString:@","]];
 }
 
 - (NSString *)userIdParameterWithUserId:(NSString *)userId {
+    
+    if (!userId) {
+        return nil;
+    }
     
     NSString *result = [NSString stringWithFormat:@"user_id=%@", userId];
     
@@ -51,6 +59,10 @@ static NSString * const versionProperty = @"v=5.103";
 }
 
 - (NSString *)fieldsParameterWithFields:(NSArray<NSString *> *)fields {
+    
+    if (!fields) {
+        return nil;
+    }
     
     return [NSString stringWithFormat:@"fields=%@", [fields componentsJoinedByString:@","]];
 }

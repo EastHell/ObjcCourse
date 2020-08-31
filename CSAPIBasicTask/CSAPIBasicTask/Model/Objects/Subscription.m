@@ -9,7 +9,7 @@
 #import "Subscription.h"
 
 @implementation Subscription
-
+	
 + (Subscription *)subscriptionWithJson:(NSDictionary *)json {
     
     Subscription *newSubscription = [Subscription new];

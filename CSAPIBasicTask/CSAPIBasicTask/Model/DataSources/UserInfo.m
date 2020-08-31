@@ -50,7 +50,9 @@
          User *user = [User userWithJson:[users firstObject]];
          
          dispatch_async(dispatch_get_main_queue(), ^{
-             completion(user);
+             if (completion) {
+                 completion(user);
+             }
          });
      }];
 }

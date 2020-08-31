@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ImageTableViewCell : UITableViewCell
+@interface ImageTableViewCell : ASTableViewCell
 
 - (void)addImage:(UIImage *)image;
 
