@@ -13,10 +13,12 @@
 #import "ImageCache.h"
 #import "FollowersTableViewController.h"
 #import "SubscriptionsTableViewController.h"
+#import "ASTableViewCell.h"
+#import "WallTableViewController.h"
 
 @interface DetailedFriendTableViewController ()
 
-@property (strong, nonatomic) NSMutableArray *cells;
+@property (strong, nonatomic) NSMutableArray<ASTableViewCell *> *cells;
 @property (strong, nonatomic) UserInfo *userInfo;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) NSString *userId;
@@ -76,14 +78,8 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == self.cells.count - 2) {
-        
-        FollowersTableViewController *vc = [[FollowersTableViewController alloc] initWithUserID:self.userId];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.cells.count - 1) {
-        
-        SubscriptionsTableViewController *vc = [[SubscriptionsTableViewController alloc] initWithUserID:self.userId];
-        [self.navigationController pushViewController:vc animated:YES];
+    if (self.cells[indexPath.row].actionBlock) {
+        self.cells[indexPath.row].actionBlock();
     }
 }
 
@@ -92,6 +88,8 @@
 - (void)configureCellsWithUser:(User *)user {
     
     self.user = user;
+    
+    __weak DetailedFriendTableViewController *weakSelf = self;
     
     if (user.photoMaxOrigURL) {
         
@@ -104,7 +102,6 @@
             [weakTableView performBatchUpdates:^{
                 if (cell) {
                     [cell addImage:image];
-                    [cell setNeedsLayout];
                 }
             } completion:nil];
         }];
@@ -119,7 +116,7 @@
         
         NSString *bdate = [dateFormatter stringFromDate:user.birthDate];
         
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        ASTableViewCell *cell = [[ASTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
         cell.textLabel.text = @"Birth date:";
         cell.detailTextLabel.text = bdate;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -130,7 +127,7 @@
         
         NSString *sex = user.sex == UserSexMale ? @"Male" : @"Female";
         
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        ASTableViewCell *cell = [[ASTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
         cell.textLabel.text = @"Sex:";
         cell.detailTextLabel.text = sex;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -139,22 +136,47 @@
     
     if (user.city) {
         
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        ASTableViewCell *cell = [[ASTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
         cell.textLabel.text = @"City:";
         cell.detailTextLabel.text = user.city;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.cells addObject:cell];
     }
     
-    UITableViewCell *followersCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
+    ASTableViewCell *followersCell = [[ASTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
     followersCell.textLabel.text = @"Followers:";
     followersCell.detailTextLabel.text = [NSString stringWithFormat:@"%lu", user.counters.followers];
+    followersCell.actionBlock = ^{
+        
+        if (weakSelf) {
+            FollowersTableViewController *vc = [[FollowersTableViewController alloc] initWithUserID:weakSelf.userId];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }
+    };
     [self.cells addObject:followersCell];
     
-    UITableViewCell *subscriptionsCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
+    ASTableViewCell *subscriptionsCell = [[ASTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
     subscriptionsCell.textLabel.text = @"Subscriptions:";
     subscriptionsCell.detailTextLabel.text = [NSString stringWithFormat:@"%lu", user.counters.subscriptions];
+    subscriptionsCell.actionBlock = ^{
+        
+        if (weakSelf) {
+            SubscriptionsTableViewController *vc = [[SubscriptionsTableViewController alloc] initWithUserID:weakSelf.userId];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }
+    };
     [self.cells addObject:subscriptionsCell];
+    
+    ASTableViewCell *wallCell = [[ASTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    wallCell.textLabel.text = @"Wall";
+    wallCell.actionBlock = ^{
+        
+        if (weakSelf) {
+            WallTableViewController *vc = [[WallTableViewController alloc] initWithOwnerID:weakSelf.userId];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }
+    };
+    [self.cells addObject:wallCell];
 }
 
 @end
