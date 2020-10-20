@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  CSAPITask
 //
 //  Created by Aleksandr on 02/10/2020.
@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class LoginViewController: UIViewController, WKNavigationDelegate {
     
     struct Premissions: OptionSet {
         let rawValue: Int
@@ -18,6 +18,16 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
 
     var webView: WKWebView!
+    var completion: (()->())?
+    
+    init(completion: (()->())?) {
+        self.completion = completion
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
@@ -70,10 +80,12 @@ client_id=7420270\
                                 expiresDate: Date(timeIntervalSinceNow: timeInterval),
                                 userID: userID)
                 
-                
-                print(AccessToken.currentToken)
-                
                 decisionHandler(.cancel)
+                
+                if let completion = completion {
+                    completion()
+                }
+                
                 return
             }
         }
