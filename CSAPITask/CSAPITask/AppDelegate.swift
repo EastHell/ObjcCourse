@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         if let window = window {
-            window.rootViewController = LoginViewController(completion: nil)
+            window.rootViewController = GroupPostsTableViewController()
             window.makeKeyAndVisible()
         }
         return true

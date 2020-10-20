@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F284D9F253EED6500994970 /* GroupPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F284D9E253EED6500994970 /* GroupPostsTableViewController.swift */; };
 		1F959C19252A44FA0008D94F /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F959C18252A44FA0008D94F /* AccessToken.swift */; };
 		1F959C1B252A51020008D94F /* KeyChainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F959C1A252A51020008D94F /* KeyChainStorage.swift */; };
 		1FE840B92527ACE0004A86E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE840B82527ACE0004A86E2 /* AppDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F284D9E253EED6500994970 /* GroupPostsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPostsTableViewController.swift; sourceTree = "<group>"; };
 		1F959C18252A44FA0008D94F /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		1F959C1A252A51020008D94F /* KeyChainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainStorage.swift; sourceTree = "<group>"; };
 		1FE840B52527ACE0004A86E2 /* CSAPITask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSAPITask.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				1FE840BA2527ACE0004A86E2 /* LoginViewController.swift */,
+				1F284D9E253EED6500994970 /* GroupPostsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				1FE840BB2527ACE0004A86E2 /* LoginViewController.swift in Sources */,
 				1FE840B92527ACE0004A86E2 /* AppDelegate.swift in Sources */,
 				1F959C19252A44FA0008D94F /* AccessToken.swift in Sources */,
+				1F284D9F253EED6500994970 /* GroupPostsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
