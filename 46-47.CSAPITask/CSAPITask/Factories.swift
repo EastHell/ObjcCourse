@@ -24,9 +24,13 @@ class Factories {
         return requestFactory
     }()
     
-    static func groupPosts(ownerID: Int) -> IGroupPosts {
+    static var resolveWallService: IWallService = {
         let apiClient = Factories.resolveApiClient
-        let gpService = GroupPostService(apiClient: apiClient)
-        return GroupPosts(ownerID: ownerID, groupPostsService: gpService)
+        let wallService = WallService(apiClient: apiClient)
+        return wallService
+    }()
+    
+    static func wallPosts(ownerID: Int) -> IWallPosts {
+        return WallPosts(ownerID: ownerID, wallService: Factories.resolveWallService)
     }
 }

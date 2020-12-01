@@ -83,8 +83,8 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = UIColor(red: 232.0/255.0, green: 236.0/255.0, blue: 233.0/255.0, alpha: 1)
-        contentView.backgroundColor = UIColor(red: 232.0/255.0, green: 236.0/255.0, blue: 233.0/255.0, alpha: 1)
+        backgroundColor = .VKgray
+        contentView.backgroundColor = .VKgray
         
         contentView.addSubview(containerView)
         containerView.configureVKStyle()
@@ -101,14 +101,14 @@ class PostTableViewCell: UITableViewCell {
         nameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 8).isActive = true
-        nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: containerView.readableContentGuide.trailingAnchor).isActive = true
         
         containerView.addSubview(dateLabel)
         
         dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
         dateLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor).isActive = true
         dateLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 8).isActive = true
-        dateLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        dateLabel.trailingAnchor.constraint(equalTo: containerView.readableContentGuide.trailingAnchor).isActive = true
         
         containerView.addSubview(postTextLabel)
         
@@ -119,7 +119,7 @@ class PostTableViewCell: UITableViewCell {
         
         commentImageView.topAnchor.constraint(equalTo: postTextLabel.bottomAnchor, constant: 16).isActive = true
         commentImageView.bottomToSuperview(inset: -8)
-        commentImageView.leadingAnchor.constraint(equalTo: postTextLabel.leadingAnchor, constant: 0).isActive = true
+        commentImageView.leadingAnchor.constraint(equalTo: containerView.readableContentGuide.leadingAnchor, constant: 8).isActive = true
         
         containerView.addSubview(commentsCountLabel)
 
@@ -138,7 +138,7 @@ class PostTableViewCell: UITableViewCell {
         likesCountLabel.topAnchor.constraint(equalTo: postTextLabel.bottomAnchor, constant: 16).isActive = true
         likesCountLabel.bottomToSuperview(inset: -8)
         likesCountLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: 8).isActive = true
-        likesCountLabel.trailingAnchor.constraint(greaterThanOrEqualTo: postTextLabel.trailingAnchor, constant: 8).isActive = true
+        likesCountLabel.trailingAnchor.constraint(lessThanOrEqualTo: containerView.readableContentGuide.trailingAnchor, constant: -8).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

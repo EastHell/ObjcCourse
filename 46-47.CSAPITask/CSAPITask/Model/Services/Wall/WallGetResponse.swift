@@ -1,8 +1,8 @@
 //
-//  WallPosts.swift
+//  WallGetResponse.swift
 //  CSAPITask
 //
-//  Created by Aleksandr on 08/11/2020.
+//  Created by Aleksandr on 26/11/2020.
 //  Copyright © 2020 Aleksandr Shushkov. All rights reserved.
 //
 
@@ -16,7 +16,7 @@ struct Likes: Codable {
     let count: Int
 }
 
-struct Post: Codable {
+struct Item: Codable {
     let from_id: Int
     let date: Int
     let text: String
@@ -37,15 +37,15 @@ struct Group: Codable {
     let photo_50: String
 }
 
-struct WallPosts: Codable {
+struct WallGetResponse: Codable {
     let count: Int
-    let items: [Post]
+    let items: [Item]
     let profiles: [Profile]
     let groups: [Group]
 }
 
-struct WallGetResponse: Codable {
-    let response: WallPosts
+struct WallGetResult: Codable {
+    let response: WallGetResponse
 }
 
 struct Paging {
@@ -53,9 +53,9 @@ struct Paging {
     var count: Int
 }
 
-struct WallPostsEndpoint: Endpoint {
+struct WallGetEndpoint: Endpoint {
     
-    typealias Response = WallGetResponse
+    typealias Response = WallGetResult
     
     private let ownerID: Int
     private let paging: Paging

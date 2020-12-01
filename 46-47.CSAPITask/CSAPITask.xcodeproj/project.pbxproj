@@ -12,6 +12,11 @@
 		1F0BCED62567B5620004038E /* UIView+VKStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0BCED52567B5620004038E /* UIView+VKStyle.swift */; };
 		1F284D9F253EED6500994970 /* GroupPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F284D9E253EED6500994970 /* GroupPostsTableViewController.swift */; };
 		1F431A2B256C4857008CA6E6 /* DateFormatter+Short.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F431A2A256C4857008CA6E6 /* DateFormatter+Short.swift */; };
+		1F431A2D256E6393008CA6E6 /* UIColor+VKcolors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F431A2C256E6393008CA6E6 /* UIColor+VKcolors.swift */; };
+		1F431A2F256EA19B008CA6E6 /* WallPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F431A2E256EA19B008CA6E6 /* WallPostViewController.swift */; };
+		1F431A37256F183C008CA6E6 /* WallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F431A36256F183C008CA6E6 /* WallService.swift */; };
+		1F431A39256F18E0008CA6E6 /* WallGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F431A38256F18E0008CA6E6 /* WallGetResponse.swift */; };
+		1F431A3B256F19FE008CA6E6 /* WallPostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F431A3A256F19FE008CA6E6 /* WallPostResponse.swift */; };
 		1F78862D25471B690011EF59 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F78862C25471B690011EF59 /* APIClient.swift */; };
 		1F78862F25471BB20011EF59 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F78862E25471BB20011EF59 /* RequestData.swift */; };
 		1F78863125472CE40011EF59 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F78863025472CE40011EF59 /* NetworkError.swift */; };
@@ -19,9 +24,7 @@
 		1F788635254740120011EF59 /* Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F788634254740120011EF59 /* Factories.swift */; };
 		1F959C19252A44FA0008D94F /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F959C18252A44FA0008D94F /* AccessToken.swift */; };
 		1F959C1B252A51020008D94F /* KeyChainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F959C1A252A51020008D94F /* KeyChainStorage.swift */; };
-		1FDF91AD25583D7F00ED4352 /* WallPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF91AC25583D7F00ED4352 /* WallPosts.swift */; };
-		1FDF91B125584BD900ED4352 /* GroupPostsSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF91B025584BD900ED4352 /* GroupPostsSevice.swift */; };
-		1FDF91B52559B7F600ED4352 /* GroupPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF91B42559B7F600ED4352 /* GroupPosts.swift */; };
+		1FDF91B52559B7F600ED4352 /* WallPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF91B42559B7F600ED4352 /* WallPosts.swift */; };
 		1FE840B92527ACE0004A86E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE840B82527ACE0004A86E2 /* AppDelegate.swift */; };
 		1FE840BB2527ACE0004A86E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE840BA2527ACE0004A86E2 /* LoginViewController.swift */; };
 		1FE840C02527ACE1004A86E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FE840BF2527ACE1004A86E2 /* Assets.xcassets */; };
@@ -34,6 +37,11 @@
 		1F0BCED52567B5620004038E /* UIView+VKStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+VKStyle.swift"; sourceTree = "<group>"; };
 		1F284D9E253EED6500994970 /* GroupPostsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPostsTableViewController.swift; sourceTree = "<group>"; };
 		1F431A2A256C4857008CA6E6 /* DateFormatter+Short.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Short.swift"; sourceTree = "<group>"; };
+		1F431A2C256E6393008CA6E6 /* UIColor+VKcolors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+VKcolors.swift"; sourceTree = "<group>"; };
+		1F431A2E256EA19B008CA6E6 /* WallPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPostViewController.swift; sourceTree = "<group>"; };
+		1F431A36256F183C008CA6E6 /* WallService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallService.swift; sourceTree = "<group>"; };
+		1F431A38256F18E0008CA6E6 /* WallGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallGetResponse.swift; sourceTree = "<group>"; };
+		1F431A3A256F19FE008CA6E6 /* WallPostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPostResponse.swift; sourceTree = "<group>"; };
 		1F78862C25471B690011EF59 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		1F78862E25471BB20011EF59 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		1F78863025472CE40011EF59 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -41,9 +49,7 @@
 		1F788634254740120011EF59 /* Factories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factories.swift; sourceTree = "<group>"; };
 		1F959C18252A44FA0008D94F /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		1F959C1A252A51020008D94F /* KeyChainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainStorage.swift; sourceTree = "<group>"; };
-		1FDF91AC25583D7F00ED4352 /* WallPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPosts.swift; sourceTree = "<group>"; };
-		1FDF91B025584BD900ED4352 /* GroupPostsSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPostsSevice.swift; sourceTree = "<group>"; };
-		1FDF91B42559B7F600ED4352 /* GroupPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPosts.swift; sourceTree = "<group>"; };
+		1FDF91B42559B7F600ED4352 /* WallPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPosts.swift; sourceTree = "<group>"; };
 		1FE840B52527ACE0004A86E2 /* CSAPITask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSAPITask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE840B82527ACE0004A86E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FE840BA2527ACE0004A86E2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -68,13 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F284DA0253EF9EC00994970 /* GroupPosts */ = {
+		1F431A35256F1827008CA6E6 /* Wall */ = {
 			isa = PBXGroup;
 			children = (
-				1FDF91AC25583D7F00ED4352 /* WallPosts.swift */,
-				1FDF91B025584BD900ED4352 /* GroupPostsSevice.swift */,
+				1F431A3A256F19FE008CA6E6 /* WallPostResponse.swift */,
+				1F431A38256F18E0008CA6E6 /* WallGetResponse.swift */,
+				1F431A36256F183C008CA6E6 /* WallService.swift */,
 			);
-			path = GroupPosts;
+			path = Wall;
 			sourceTree = "<group>";
 		};
 		1F959C1C252A735C0008D94F /* KeyChain */ = {
@@ -100,7 +107,7 @@
 		1FDF91B2255866CC00ED4352 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1F284DA0253EF9EC00994970 /* GroupPosts */,
+				1F431A35256F1827008CA6E6 /* Wall */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -108,7 +115,7 @@
 		1FDF91B32559B73800ED4352 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
-				1FDF91B42559B7F600ED4352 /* GroupPosts.swift */,
+				1FDF91B42559B7F600ED4352 /* WallPosts.swift */,
 			);
 			path = Containers;
 			sourceTree = "<group>";
@@ -171,6 +178,7 @@
 			children = (
 				1FE840BA2527ACE0004A86E2 /* LoginViewController.swift */,
 				1F284D9E253EED6500994970 /* GroupPostsTableViewController.swift */,
+				1F431A2E256EA19B008CA6E6 /* WallPostViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -181,6 +189,7 @@
 				1FE840CE2527B1D8004A86E2 /* UIView+Constraints.swift */,
 				1F0BCED52567B5620004038E /* UIView+VKStyle.swift */,
 				1F431A2A256C4857008CA6E6 /* DateFormatter+Short.swift */,
+				1F431A2C256E6393008CA6E6 /* UIColor+VKcolors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,20 +327,23 @@
 			files = (
 				1F959C1B252A51020008D94F /* KeyChainStorage.swift in Sources */,
 				1F78862D25471B690011EF59 /* APIClient.swift in Sources */,
+				1F431A2D256E6393008CA6E6 /* UIColor+VKcolors.swift in Sources */,
 				1F0BCED225642CC60004038E /* PostTableViewCell.swift in Sources */,
 				1FE840CF2527B1D9004A86E2 /* UIView+Constraints.swift in Sources */,
 				1FE840BB2527ACE0004A86E2 /* LoginViewController.swift in Sources */,
 				1F0BCED62567B5620004038E /* UIView+VKStyle.swift in Sources */,
 				1FE840B92527ACE0004A86E2 /* AppDelegate.swift in Sources */,
-				1FDF91B52559B7F600ED4352 /* GroupPosts.swift in Sources */,
+				1FDF91B52559B7F600ED4352 /* WallPosts.swift in Sources */,
 				1F959C19252A44FA0008D94F /* AccessToken.swift in Sources */,
 				1F78863325472EF40011EF59 /* RequestFactory.swift in Sources */,
+				1F431A37256F183C008CA6E6 /* WallService.swift in Sources */,
 				1F78863125472CE40011EF59 /* NetworkError.swift in Sources */,
 				1F788635254740120011EF59 /* Factories.swift in Sources */,
 				1F284D9F253EED6500994970 /* GroupPostsTableViewController.swift in Sources */,
 				1F78862F25471BB20011EF59 /* RequestData.swift in Sources */,
-				1FDF91B125584BD900ED4352 /* GroupPostsSevice.swift in Sources */,
-				1FDF91AD25583D7F00ED4352 /* WallPosts.swift in Sources */,
+				1F431A39256F18E0008CA6E6 /* WallGetResponse.swift in Sources */,
+				1F431A2F256EA19B008CA6E6 /* WallPostViewController.swift in Sources */,
+				1F431A3B256F19FE008CA6E6 /* WallPostResponse.swift in Sources */,
 				1F431A2B256C4857008CA6E6 /* DateFormatter+Short.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

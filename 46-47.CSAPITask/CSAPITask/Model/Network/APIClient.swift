@@ -70,6 +70,7 @@ extension APIClient: IAPIClient {
                 let decoded = try JSONDecoder().decode(T.Response.self, from: data)
                 responseHandler(.success(decoded))
             } catch {
+                //Тут можно попробовать спарсить JSON ошибки
                 responseHandler(.error(error))
             }
         }

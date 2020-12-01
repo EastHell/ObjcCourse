@@ -1,5 +1,5 @@
 //
-//  GroupPostsContainer.swift
+//  WallPosts.swift
 //  CSAPITask
 //
 //  Created by Aleksandr on 09/11/2020.
@@ -8,46 +8,53 @@
 
 import Foundation
 
-protocol IGroupPosts {
+protocol IWallPosts {
+    var ownerID: Int { get }
     var count: Int { get }
-    subscript(index: Int) -> Post { get }
-    func fetch()
+    
     var errorHandler: ((Error) -> ())? { get set }
     var reloadHandler: (() -> ())? { get set }
+    
+    subscript(index: Int) -> Item { get }
+    func fetch()
     func profile(with id: Int) -> Profile?
     func group(with id: Int) -> Group?
+    func refresh()
 }
 
-class GroupPosts: IGroupPosts {
+class WallPosts: IWallPosts {
+    
+    var ownerID: Int
     
     var errorHandler: ((Error) -> ())?
     var reloadHandler: (() -> ())?
     
-    let groupPostsService: GroupPostService
+    let wallPostsService: IWallService
     
-    var groupPosts: [Post] = []
+    var wallPosts: [Item] = []
     var profiles: [Int: Profile] = [:]
     var groups: [Int: Group] = [:]
-    var ownerID: Int
+    
+    private var totalCount = 0
     private var paging: Paging
     
-    var count: Int {
-        get {
-            return groupPosts.count
-        }
-    }
-    
-    init(ownerID: Int, groupPostsService: GroupPostService) {
+    init(ownerID: Int, wallService: IWallService) {
         self.ownerID = ownerID
-        self.groupPostsService = groupPostsService
+        self.wallPostsService = wallService
         self.paging = Paging.init(offset: 0, count: 20)
     }
     
-    subscript(index: Int) -> Post {
-        if index == groupPosts.count - 10 {
+    var count: Int {
+        get {
+            return wallPosts.count
+        }
+    }
+    
+    subscript(index: Int) -> Item {
+        if (index == wallPosts.count - 10) && (wallPosts.count < totalCount) {
             fetch()
         }
-        return groupPosts[index]
+        return wallPosts[index]
     }
     
     func profile(with id: Int) -> Profile? {
@@ -62,11 +69,12 @@ class GroupPosts: IGroupPosts {
     }
     
     func fetch() {
-        groupPostsService.getGroupPosts(ownerID: ownerID, paging: paging) { [weak self](result) in
+        wallPostsService.wallGet(ownerID: ownerID, paging: paging) { [weak self](result) in
             guard let self = self else { return }
             switch result {
             case let .success(res):
-                self.groupPosts.append(contentsOf: res.response.items)
+                self.totalCount = res.response.count
+                self.wallPosts.append(contentsOf: res.response.items)
                 for profile in res.response.profiles {
                     self.profiles.updateValue(profile, forKey: profile.id)
                 }
@@ -74,12 +82,20 @@ class GroupPosts: IGroupPosts {
                     self.groups.updateValue(group, forKey: group.id)
                 }
                 self.reloadHandler?()
-                if self.groupPosts.count < res.response.count {
+                if self.wallPosts.count < res.response.count {
                     self.paging.offset += res.response.items.count
                 }
             case let .error(err):
                 self.errorHandler?(err)
             }
         }
+    }
+    
+    func refresh() {
+        wallPosts.removeAll()
+        profiles.removeAll()
+        groups.removeAll()
+        paging = Paging.init(offset: 0, count: 20)
+        fetch()
     }
 }

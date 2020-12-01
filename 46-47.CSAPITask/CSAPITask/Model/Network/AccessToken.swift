@@ -50,7 +50,7 @@ class AccessToken: NSObject, NSCoding {
             
             return result
         } catch KeyChainStorage.KeyChainStorageError.cannotFindItem {
-            print("cannot find item")
+            print("AccessToken.currentToken() cannot find item")
         } catch let err {
             print(err.localizedDescription)
         }
@@ -72,14 +72,14 @@ class AccessToken: NSObject, NSCoding {
         do {
             try storage.delete()
         } catch {
-            print("cannot delete token from storage")
+            print("AccessToken.add() cannot delete token from storage")
         }
         
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: accessToken, requiringSecureCoding: false)
             try storage.add(item: data)
         } catch {
-            print("cannot add token to storage")
+            print("AccessToken.add() cannot add token to storage")
         }
     }
 }
