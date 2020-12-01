@@ -11,9 +11,9 @@ import Kingfisher
 
 class GroupPostsTableViewController: UITableViewController {
     
-    var groupPosts: IGroupPosts
-    
-    init(groupPosts: IGroupPosts) {
+    var groupPosts: IWallPosts
+    	
+    init(groupPosts: IWallPosts) {
         self.groupPosts = groupPosts
         super.init(style: .plain)
     }
@@ -25,13 +25,17 @@ class GroupPostsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let postButton = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postMessage))
+        postButton.tintColor = .white
+        navigationItem.rightBarButtonItem = postButton
+        
         groupPosts.errorHandler = { [weak self](error) in
             switch error {
             case let err as NetworkError where [.noAccessToken, .expiredAccessToken].contains(err):
                 let lvc = LoginViewController()
                 self?.present(lvc, animated: true, completion: nil)
             default:
-                print("Error occured: \(error.localizedDescription)")
+                print("GroupPostsTableViewController.viewDidLoad() Error occured: \(error.localizedDescription)")
             }
         }
         
@@ -43,14 +47,24 @@ class GroupPostsTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-        tableView.backgroundColor = UIColor(red: 59.0/255.0, green: 97.0/255.0, blue: 151.0/255.0, alpha: 1)
-        
+        tableView.backgroundColor = .VKgray
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+    }
+    
+    @objc func postMessage() {
+        let messageVC = WallPostViewController(ownerID: groupPosts.ownerID) { [weak self] in
+            self?.groupPosts.refresh()
+        }
+        let navController = UINavigationController(rootViewController: messageVC)
+        navController.navigationBar.barTintColor = .VKblue
+        present(navController, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        groupPosts.fetch()
+        if groupPosts.count < 1 {
+            groupPosts.fetch()
+        }
     }
     
     // MARK: - Table view data source

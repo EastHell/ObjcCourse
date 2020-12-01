@@ -18,16 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //Эта штука для того чтобы выпиливать полученный токен
-        /*let storage = KeyChainStorage.keychainStorage(tag: "CSAPITask.keys.access_token")
-        do {
-            try storage?.delete()
-            print("token deleted ")
-        } catch {
-            print("token not deleted")
-        }*/
+//        let storage = KeyChainStorage.keychainStorage(tag: "CSAPITask.keys.access_token")
+//        do {
+//            try storage?.delete()
+//            print("token deleted ")
+//        } catch {
+//            print("token not deleted")
+//        }
         
         if let window = window {
-            window.rootViewController = GroupPostsTableViewController(groupPosts: Factories.groupPosts(ownerID: -58860049))
+            let groupPostsController = GroupPostsTableViewController(groupPosts: Factories.wallPosts(ownerID: 593208226))
+            let navController = UINavigationController(rootViewController: groupPostsController)
+            navController.navigationBar.barTintColor = .VKblue
+            navController.navigationItem.title = "iOS Development Course"
+            window.rootViewController = navController
             window.makeKeyAndVisible()
         }
         

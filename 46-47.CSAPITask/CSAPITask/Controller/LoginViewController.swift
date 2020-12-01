@@ -15,6 +15,7 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         let rawValue: Int
         
         static let friends = Premissions(rawValue: 1<<1)
+        static let wall = Premissions(rawValue: 1<<13)
     }
 
     var webView: WKWebView!
@@ -39,7 +40,7 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let premissions: Premissions = [.friends]
+        let premissions: Premissions = [.friends, .wall]
         
         let myURL = URL(string:"""
 https://oauth.vk.com/authorize?\
